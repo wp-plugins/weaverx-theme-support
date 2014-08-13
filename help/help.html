@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Weaver X Theme Support</title>
+<style type="text/css">
+body {
+	background: #eeeeee;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 10px; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	background-color: #ffd;
+}
+
+/* everything about each major block on the site - may be mods in some places */
+
+#container {
+	max-width:800px;
+	background-color: #00CC00;
+}
+#mainContent {
+	background-color: #ffc;
+}
+.oneColFixCtr #container {
+	max-width: 750px;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
+	background: #FFFFCD;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 1px solid #000000;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+}
+.oneColFixCtr #mainContent {
+	padding: 0 20px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+	font-size:12px;
+}
+/* layouts for layout boxes */
+.layoutbox {
+	width:700px;
+	text-align:center;
+	margin:0 25px;
+}
+.l_layout {
+	display:block;
+	width:140px;
+	height:110px;
+	float:left;
+	margin-right:10px;
+	margin-bottom:10px;
+	display:inline;
+	border:1px solid #888;
+	color:black;
+	text-align:center;
+	font:15px arial, sans-serif;
+}
+.l_layout span {
+	display:block;
+}
+.l_header {
+	width:140px;
+	height:20px;
+	background:#CCF;
+	line-height:20px;
+}
+.l_content {
+	width:100px;
+	height:70px;
+	background:beige;
+	float:left;
+	display:inline;
+	line-height:70px;
+}
+.l_contentcenter {
+	width:60px;
+	height:70px;
+	background:beige;
+	float:left;
+	display:inline;
+	line-height:70px;
+}
+.l_content2 {
+	width:80px;
+	height:70px;
+	background:beige;
+	float:left;
+	display:inline;
+	line-height:70px;
+}
+.l_contentw {
+	width:140px;
+	height:70px;
+	background:beige;
+	float:left;
+	display:inline;
+	line-height:70px;
+}
+.l_stdbar {
+	width:40px;
+	height:70px;
+	float:left;
+	display:inline;
+}
+.l_widebar {
+	width:60px;
+	height:70px;
+	float:left;
+	display:inline;
+}
+.l_righttop {
+	width:40px;
+	height:20px;
+	background:#FE8;
+	float:left;
+	display:inline;
+	line-height:20px;
+}
+.l_righttopwide {
+	width:60px;
+	height:20px;
+	background:#FE8;
+	float:left;
+	display:inline;
+	line-height:20px;
+}
+.l_rightup {
+	width:40px;
+	height:25px;
+	margin:0;
+	background:#FAA;
+	float:left;
+	display:inline;
+	line-height:25px;
+}
+.l_rightright {
+	width:40px;
+	height:50px;
+	margin:0;
+	background:#FAA;
+	float:left;
+	display:inline;
+	line-height:50px;
+}
+.l_rightdown {
+	width:40px;
+	height:25px;
+	margin:0;
+	background:#AFA;
+	float:left;
+	display:inline;
+	line-height:25px;
+}
+.l_leftleft {
+	width:40px;
+	height:70px;
+	margin:0;
+	background:#AFA;
+	float:left;
+	display:inline;
+	line-height:70px;
+}
+.l_leftshort {
+	width:30px;
+	height:50px;
+	margin:0;
+	background:#AFA;
+	float:left;
+	display:inline;
+	line-height:50px;
+}
+.l_skinny {
+	width:30px;
+	height:50px;
+	margin:0;
+	background:#FAA;
+	float:left;
+	display:inline;
+	line-height:50px;
+}
+.l_footer {
+	clear:left;
+	width:140px;
+	height:20px;
+	background:#DDF;
+	color:#000;
+	line-height:20px;
+}
+h4 {
+	font-weight: bold;
+	font-style:italic;
+	color: #000066;
+	text-decoration: underline;
+}
+h3 {
+	font-size: medium;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: underline;
+}
+h2 {
+	font-size: large;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: underline;
+	margin-top: 40pt;
+}
+h1 {
+	font-size: x-large;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: underline;
+}
+.codebox {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 10px;
+	font-style: normal;
+	background-color: #E8E8E8;
+	margin: 10px;
+	padding: 4px;
+	border: 1px solid #333333;
+	color: #000000;
+	width: 80%;
+}
+.attrs {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color:#000000;
+	text-decoration: none;
+}
+.css {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 9pt;
+	font-style: normal;
+}
+.box {
+	color: #000000;
+	text-decoration: none;
+	margin: 5px;
+	padding: 5px;
+	border: thin solid #000000;
+}
+.nospace {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.style3 {
+	font-family: "Courier New", Courier, monospace
+}
+.style4 {
+	font-family: monospace
+}
+.style6 {
+	color: #990000;
+	font-style: italic;
+}
+.style7 {
+	color: #CC3300;
+	font-weight: bold;
+}
+.code1 {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 14px;
+	font-style: italic;
+}
+.red-highlight {
+	color: #CC3300;
+}
+</style>
+</head>
+<body class="oneColFixCtr">
+<div id="container">
+  <div id="mainContent"> <a name="top" id="top"></a>
+    <h2><b>Weaver X Theme Support Plugin Documentation -- Version 1.0</b></h2>
+    <h4>Table of Contents</h4>
+    <ul style="line-height:1.7em;">
+      <li><a href="#summary"><strong>Plugin Summary</strong></a></li>
+<li><strong><a href="#admin_page">Weaver X Theme Extras Admin Page</a> </strong></li>
+<li><a href="#sc_summary"><strong>Shortcode Summary</strong></a></li>
+<ul>
+<li><a href="#tab_group"><strong>[tab_group] - content in tabs</strong></a></li>
+<li><strong><a href="#headerimage">[header_image] Shortcode</a></strong></li>
+<li><strong><a href="#schtml">[html]</a></strong></li>
+<li><strong><a href="#schtml">[div]text[/div]</a></strong></li>
+<li><strong><a href="#sciframe">iframe - [iframe]</a></strong></li>
+<li><strong><a href="#showhidemobile">[hide_mobile]</a></strong></li>
+<li><strong><a href="#showhideloggedin">[show_if_logged_in] / [hide_if_logged_in]</a></strong></li>
+<li><strong><a href="#sitetitlesc">[site_title], [site_tagline]</a></strong></li>
+<li><strong><a href="#bloginfo">[bloginfo arg='name' style='your css']</a></strong></li>
+<li><strong><a href="#video">Video - [vimeo], [youtube]</a></strong></li>
+</ul>
+<li><a href="#widg-sum"><strong>Widget Summary</strong></a>
+  <ul>
+<li><strong><a href="#widg-login">Weaver X Login Widget</a></strong></li>
+<li><strong><a href="#widg_pp_text">Weaver X  Per Page Text</a></strong></li>
+<li><strong><a href="#widg_text_2">Weaver X Text 2</a></strong></li>
+  </ul>
+</li>
+    </ul>
+    <h3><a name="summary" id="summary"></a>Plugin Summary </h3>
+    <p>The Weaver X Theme Support Plugin provides a collection of shortcodes to allow you to easily add extra content and features to your regular content. These shortcodes will work with almost any WordPress theme. </p>
+<p>While these shortcodes should prove useful with most any theme, one of the goals of these shortcodes is to provide an alternative to users of theWeaver X theme.</p>
+<h2><a name="admin_page" id="admin_page"></a>Weaver X Theme Extras Admin Page</h2>
+<p>This plugin has just a few options, all found on the Weaver X Theme Support admin page under the WordPress dashboard Appearance section.</p>
+<h2><a name="sc_summary" id="sc_summary"></a>Shortcode Summary</h2>
+<h3><a name="tab_group" id="tab_group"></a>[tab_group] - content in tabs </h3>
+<p>Show content displayed on tabbed pages.</p>
+<p><strong>Shortcode usage:</strong><br />
+<pre>
+[tab_group border_color=black page_min_height=200px]
+    [tab title='tab one']This is the content found on first tab.[/tab]
+    [tab title='tab two']And we have more content for the second tab.[/tab]
+    [tab title='last tab']And this is the last tab. There could be more.[/tab]
+[/tab_group]
+</pre>
+<h4>Short code parameters</h4>
+You can supply values for these parameters to control the look of the tabbed section.
+<br />
+<ul>
+    <li><b>border_color:</b> tab and pane border color - default #888</li>
+    <li><b>tab_bg</b>: normal bg color of tab (default #CCC)</li>
+    <li><b>tab_selected_color</b>: color of tab when selected (default #EEE)</li>
+    <li><b>pane_min_height</b>: min height of a pane to help make all even if needed</li>
+    <li><b>pane_bg</b>: bg color of pane</li>
+</ul>
+</p>
+<h3><a name="headerimage" id="headerimage"></a><strong>[header_image] Shortcode</strong></h3>
+<p>The <code>[header_image]</code> shortcode allows you display the current header image wherever you want.
+  For example, you can get the header image into the Header Widget Area by using this shortcode in a text widget.
+  The current standard or mobile header image will be displayed. Only the <code>&lt;img ... &gt;</code> is displayed --
+  the image will not be wrapped in a link to the site.</p>
+
+<p><strong>Shortcode usage:</strong> <code>[header_image h='size' w='size' style='inline-style']</code>
+<br />
+<ol>
+    <li><strong>w='size' h='size'</strong> - By default, no height or image properties are included with the
+    header <code>&lt;img ... &gt;</code>, which will result in an image scaled to fit into whatever the natural
+    width of the enclosing HTML container is (the content area, a text widget, etc.). You may specify an explicit
+    value (usually in px) for the height and width of the image.
+    </li>
+    <li><strong>style='inline-style-rules'</strong> - Allows you to add inline style to wrap output of the shortcode.
+    Don't include the 'style=' or wrapping quotation marks. Do include a ';' at the end of each rule. The output will look like
+    <code>style="your-rules;"</code> - using double quotation marks.
+</li>
+</ol>
+<h3><a name="schtml" id="schtml"></a><strong>[html]</strong></h3>
+
+<p>The Weaver X Theme Support <code>[html]</code> shortcode allows you to add arbitrary HTML to your post and page content. The
+main purpose of this shortcode is to get around the auto paragraph and line break and other HTML stripping functionality
+of the WordPress editor.</p>
+
+<p><strong>Shortcode usage:</strong> <code>[html html-tag args='parameters']</code>
+<br />
+<ol>
+    <li><strong>html-tag</strong> - The first parameter to the shortcode must be present, and must be a standard
+    HTML tag - <code>p</code>, <code>br</code>, or <code>span</code>, for example. You just supply the tag - no quotation
+    marks, no '=', just the tag. The shortcode provides the &lt; and &gt;. If you need a wrapping HTML tag (e.g., <code>span</code> and <code>/span</code>), use
+    two shortcodes:<br />
+    <code>[html span args='style="color:red"']content to make red[html /span]</code>
+    </li>
+    <li><strong>args='parameters'</strong> - Allows you to specify arbitrary parameters for your HTML tag. See the example above.
+    </li>
+</ol>
+</p>
+
+<h3><a name="schtml" id="scdiv"></a><strong>[div]text[/div]</strong></h3>
+
+<p>The Weaver X Theme Support <code>[div]</code> shortcode allows easily add HTML &lt;div&gt; tags to your post and page content. The
+main purpose of this shortcode is to get around need to switch to the HTML editor view when you need to
+wrap your content in a &lt;div&gt;.</p>
+<p>
+	This will work exactly like a standard HMTL &lt;div&gt; tag. It supports 'id', 'class',
+    and 'style' parameters, which are the most useful. Instead of wrapping your text in &lt;div&gt; tags, wrap them like
+    this (the Visual view will work just fine):<br />
+    <code>[div style="font-size:20px;']This content will be large.[/div]</code>
+</p>
+
+<p><strong>Shortcode usage:</strong> <code>[div id='class_id' class='class_name' style='style_values']text[/div]</code>
+<br />
+<ol>
+    <li><strong>id='class_id' class='class_name' style='style_values'</strong> - Allows you to specify id, class, and style for the &lt;div&gt;. See the example above.
+    </li>
+</ol>
+</p>
+
+<h3><a name="sciframe" id="sciframe"></a><strong>iframe - [iframe]</strong></h3>
+
+<p>The <code>[iframe]</code> shortcode allows you easily display the content of an external site. You simply have to specify
+the URL for the external site, and optionally a height. This shortcode automatically generates the correct HTML &lt;iframe&gt; code.</p>
+
+<p><strong>Shortcode usage:</strong> <code>[iframe src='http://example.com' height=600 percent=100 style="style"]</code>
+<br />
+<ol>
+    <li><strong>src='http://example.com'</strong> - The standard URL for the external site.
+    </li>
+    <li><strong>height=600</strong> - Optional height to allocate for the site - in px. Default is 600.
+    </li>
+    <li><strong>percent=100</strong> - Optional width specification in per cent. Default is 100%.
+    </li>
+    <li><strong>style="style"</strong> - Optional style values. Added to &lt;iframe&gt; tag as style="values".
+    </li>
+</ol>
+</p>
+
+<h3><a name="showhidemobile" id="showhidemobile"></a><strong>[hide_mobile]</strong></h3>
+<p>The <code>[hide_mobile]</code>shortcode allows you to selectively
+display content depending if the visitor is using a standard browser or a mobile device browser. You might want
+to disable a video on mobile devices.</p>
+
+<p><strong>Shortcode usage:</strong> <code>[hide_mobile phone=0|1 smalltablet=0|1 desktop=0|1]content to hide[/hide_mobile]</code>
+</p>
+<p>You bracket the content you want to selectively display with <code>[hide_mobile]</code> and closing
+<code>[/hide_mobile]</code> tags. That content can contain other shortcodes as needed.
+</p>
+<p>
+The parameters for <code>[hide_mobile]</code> are designed to allow you to hide <em>or</em> show any content on and of the
+three device sizes recognized by Weaver X: 'phone', 'smalltablet', and 'desktop'. If you want to <strong>hide</strong> content on
+a specific device, you give the appropriate parameter a value of 1 (e.g., <code>[hide_mobile desktop=1]</code>). If you want to <strong>show</strong> content
+on a specific device, you give the parameter a value of 0 (e.g., <code>[hide_mobile phone=0]</code>). Because this shortcode will typically be
+used to <em>hide</em> content, the default is to hide on 'phone' and 'smalltablet' if you don't specify any values. So,
+<code>[hide_mobile]content[/hide_mobile]</code> is the same as <code>[hide_mobile phone=1 smalltablet=1 desktop=0]content[/hide_mobile]</code>. You can use
+the default values, or always specify 'phone', 'smalltablet', and 'desktop'.
+</p>
+
+
+<h3><a name="showhideloggedin" id="showhideloggedin"></a><strong>[show_if_logged_in] / [hide_if_logged_in]</strong></h3>
+
+<p>The <code>[show_if_logged_in]</code> and <code>[hide_if_logged_in]</code>shortcodes allow you to selectively
+display content depending if the visitor is logged in or not.</p>
+
+<p><strong>Shortcode usage:</strong> <code>[show_if_logged_in]content to show[/show_if_logged_in]</code>
+</p>
+<p>You bracket the content you want to selectively display with <code>[show_if_logged_in] or [hide_if_logged_in]</code> and closing tags <code>[/show_if_logged_in]</code> or
+<code>[/hide_if_logged_in]</code>. That content can contain other shortcodes as needed. </p>
+
+
+<h3><a name="sitetitlesc" id="sitetitlesc"></a><strong>[site_title], [site_tagline]</strong></h3>
+
+<p>The <code>[site_title]</code> and <code>[site_tagline]</code> shortcodes allow you display the current
+site title and site tagline. (The site tagline was formerly called the site description, thus the name of the shortcode.) This can be useful in a text widget in the Header Widget Area, for example.</p>
+<p><em>Note:</em> If you want to position the content of a text widget within the a cell of the Header Widget Area, you could use the following
+example:</p>
+    <p><code>[site_title style='font-size:150%;position:absolute;padding-left:20px;padding-top:30px;']</code></p>
+
+<p><strong>Shortcode usage:</strong> <code>[site_title style='inline-style'] [site_tagline style='inline-style']</code>
+<br />
+<ol>
+    <li><strong>style='inline-style-rules'</strong> - Allows you to add inline style to wrap output of the shortcode.
+      Don't include the 'style=' or wrapping quotation marks. Do include a ';' at the end of each rule. The output will look like
+      <code>style="your-rules;"</code> - using double quotation marks.
+    </li>
+    </ol>
+
+<h3><a name="bloginfo" id="bloginfo"></a><strong>[bloginfo arg='name' style='your css']</strong></h3>
+
+<p>This shortcode can be used to access the WordPress function 'get_bloginfo($arg)'. This will return a number of useful
+strings depending on the value. All the supported values are listed at http://codex.wordpress.org/Function_Reference/get_bloginfo.
+Some useful values include 'stylesheet_directory' and 'template_directory'. You can wrap the bloginfo output with css added to a &lt;span style=&quot;your css&quot;&gt;.
+</p>
+
+<h3><a name="video" id="video"></a><strong>Video - [vimeo], [youtube]</strong></h3>
+<p>Weaver X Theme Support supports specialized shortcodes to display video. While there are other ways to embed video, the Weaver X Theme Support versions have two important features. First, they will auto adjust to the width of your content, <em><strong>including</strong></em> the mobile view. Second, they use the latest iframe/HTML5 interface provided by YouTube and Vimeo.</p>
+<p><strong>Specifying Video Display Size for both shortcodes</strong></p>
+<p>Weaver X Theme Support supports a common set of options for both the YouTube and Vimeo shortcodes to support displaying your videos with a specific width and correct height. By default, your videos will be displayed using the full width of the content area being used (percent=100). The percent= parameter is used to specify the width you want.</p>
+<p>The height of the video is automatically determined based on the width and the display ratio of the particular video. By default, Weaver X Theme Support will assume a widescreen 9:16 ratio (height is width*0.5625). If you specify 'sd=1', then standard def ratio is assumed (3:4 ratio - height is width*0.75). If you have a custom sized video clip, you may also specify an exact ratio (e.g., 3:9, or ratio=.333). Both Vimeo and YouTube will accept videos with custom ratios, but they must be generated correctly without any letterboxing to display correctly.</p>
+<p>Finally, you may specify if the video should be centered or no within the display area using &quot;center=0&quot; to not center (centering is on by default).</p>
+<p>Note - if you want to display more than one video horizontally, use &quot;center=0&quot; and specify an appropriate percentage to fit all the videos.</p>
+<p>Parameters in Common</p>
+<ul>
+  <li>percent=100 - By default, the video will be sized to fill the full content space. You can use the percent value to make
+  the video use a percentage of the content space (but mobile will always use full width).</li>
+  <li>ratio=0.5625 - By default, Weaver X Theme Support assumes your video will be a standard 9:16 widescreen video. You can get Standard Def videos by using &quot;sd=1&quot; or &quot;ratio=.075&quot;. You can also specify a custom ratio.</li>
+  <li>center=1 - Specify 'center=0' to disable centering of the video.</li>
+  <li>sd=0 - By default, Weaver X Theme Support will generate sizes for HD/widescreen videos. To display old 4:3 standard definition videos, include 'sd=1' in the shortcode.</li>
+  <li>w=640 - By default, the [vimeo/youtube] shortcode will use the percent value to determine size of the video. A short JavaScript is provided to responsively display videos. You can override the percent and display a fixed size. This is required for proper display in a [slider], or if you've enabled the FitVids option on the Video tab of the Weaver X Theme Support admin tab.</li>
+</ul>
+<h4>Vimeo</h4>
+<pre><strong>[vimeo vimeo-url id=videoid sd=0 percent=100 ratio=0.5625 center=1 color=#hex
+   autoplay=0 loop=0 portrait=1 title=1 byline=1]
+</strong></pre>
+<p>This will display Vimeo videos. At the minimum, you can provide the standard http://vimeo.com/nnnnn link, or just the video ID number (which is part of the Vimeo Link). The other Vimeo specific options include:</p>
+<ul>
+  <li>color - You can optionally specify a Vimeo color theme using 6 hex digits for a color value.</li>
+  <li>autoplay - Add 'autoplay=1' to have the video autoplay.</li>
+  <li>loop - Add 'loop=1' to have the video loop.</li>
+  <li>portrait, title, byline - You can specify a value '=0' for these to hide the display of the corresponding element on the Vimeo player.
+  Portrait is the avatar/icon, title is the video title, and byline is source attribution.<br />
+  </li>
+</ul>
+<h4>YouTube</h4>
+<code><strong>[youtube youtube-url id=videoid sd=0  percent=100 ratio=0.5625 center=1 rel=1 https=0 privacy=0 {youtube options}]
+</strong></code>
+<p>This will display YouTube videos. At the minimum, you can provide the standard http://youtu.be/xxxxxx share link (including the options YouTube lets you specify), the long format share link, or just the video ID number using the id=videoid parameter (which is part of the YouTube Link). The other YouTube specific options include:</p>
+<ul>
+  <li>rel - If you specify 'rel=0', YouTube won't show related videos after the video plays.</li>
+  <li>https - If you specify 'https=1', YouTube will use the https protocol.</li>
+  <li>privacy - If you specify 'privacy=1', YouTube won't used cookies to track your viewing.</li>
+</ul>
+<p>In addition to the above [youtube] options, the shortcode also supports most standard YouTube options. These are more fully described on the <a href="http://code.google.com/apis/youtube/player_parameters.html" target="_blank">YouTube Embedded Player Parameters</a> page.</p>
+<p>The supported options, with Weaver X Theme Support's default values include:</p>
+<p>'autohide' = '1' . . . . . . 0: always show controls; 1: autohide controls; 2: autohide progress bar<br />
+'autoplay' = '0' . . . . . . 1: auto play; 0: don't<br />
+'border' = '0' . . . . . . . . 0: no border; 1: border using color1 and color2 (don't seem to work)<br />
+'color' = not set . . . . . . progress bar color - red or white<br />
+'color1' = not set . . . . . RGB hex value for border color<br />
+'color2' = not set . . . . . RGB hex value for control bar bg<br />
+'controls' = '1' . . . . . . . 0: hide player controls<br />
+'disablekb' = '0' . . . . . . 1: disable keyboard controls<br />
+'egm' ='0' . . . . . . . . . . . 1: enable &quot;Enhanced Genie Menu&quot;<br />
+'hd' = '0' . . . . . . . . . . . . 1: enable HD playback by default<br />
+'iv_load_policy' = '1' . . . 1: show annotations; 3: don't show; 2: discontinued support<br />
+'loop' = '0' . . . . . . . . . . . 1: loop video<br />
+'modestbranding' = '0' . .1: hide YouTube logo - will still show label in upper right corner<br />
+'origin' = not set . . . . . . . See YouTube docs<br />
+'playlist' = not set . . . . . . Comma separated list of videoIDs to play (id/url video played 1st)<br />
+'showinfo' = '1' . . . . . . . 0: hide video title<br />
+'showsearch' = '1' . . . . . 0: hide video searchbox<br />
+'start' = not set . . . . . . . start vide this number of seconds from start<br />
+'theme' = 'dark' . . . . . . . dark or light - display theme for player<br />
+'wmode' = 'transparent' . Keeps video behind menu bars, etc. Other values available - see YouTube</p>
+<h2><a name="widg-sum" id="widg-sum"></a>Widget Summary</h2>
+<h3><a name="widg-login" id="widg-login"></a>Weaver X Login Widget</h3>
+<p>This simple widget shows a login in link, or a welcome, Site Admin, and Log out choice if the user is logged in.</p>
+<h3><a name="widg_pp_text" id="widg_pp_text"></a>Weaver X Per Page Text</h3>
+<p>This widget will work like a text widget, but the title and content are defined by custom fields set on a Per Page basis. For any page, define the Custom Field <em>wvrx_ts_pp_title</em>if you want a title, and define Custom Field<em>wvrx_ts_pp_text</em> as the content. Content can include arbitrary text, HTML, and shortcodes. The text will not automatically add paragraphs. The widget will display only if the custom fields are defined when that page is displayed. (This widget won't display on the default blog or other archive-like pages.)</p>
+<h3><a name="widg_text_2" id="widg_text_2"></a>Weaver X  Text 2</h3>
+<p>This widget lets you add two columns of text. It is most useful in wide widget areas such as a content top or bottom widget area, or a wide footer widget area.</p>
+<p>&nbsp;</p>
+<h2><br />
+</h2>
+<p>The Weaver X Theme Support Plugin and this document are &copy; 2014, Bruce E. Wampler. <a ref="http://weavertheme.com">Web Site - WeaverTheme.com</a></p>
+
+    </div>
+</div>
+</body>
+</html>
