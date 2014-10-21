@@ -46,4 +46,15 @@ function wvrx_ts_wpupdate_option($name,$opts) {
     }
 }
 
+// Interface to Weaver Xtreme
+
+add_action('weaverx_theme_support_addon','wvrx_ts_theme_support_addon');
+function wvrx_ts_theme_support_addon() {
+?>
+<div class="a-plus">
+	<p><strong style="font-size:110%;">You have Weaver Xtreme Theme Support installed.</strong><br />
+	&nbsp;&nbsp;See the Dashboard : Appearance : Theme Support menu for settings and help.</p>
+</div>
+<?php
+}
 ?>

@@ -9,7 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 0.1
+Stable tag: 1.0
 
 A useful shortcode and widget collection for Weaver X
 
@@ -77,6 +77,16 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == Changelog ==
+= 0.5 =
+* Added [ show/hide_if ], removed [ hide_mobie ], [show_if_logged_in]
+* Updated Doc
+* Added action for interface to Weaver Xtreme "Add-ons" tab
+
+= 0.4 =
+* Optimized loading of jslib - only needed by tab group, so not loaded until shortcode used
+
+= 0.3 =
+* Fixed video shortcodes
 
 = 0.1 =
 

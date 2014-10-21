@@ -18,11 +18,10 @@ function wvrx_ts_admin_page() {
 ?>
 
 <div class="atw-wrap">
-    <h2>Weaver X Theme Support - Settings and Help - Version <?php echo WVRX_TS_VERSION;?> </h2>
+    <h2>Weaver X Theme Support - Version <?php echo WVRX_TS_VERSION;?> </h2>
     <hr />
 <p>This page shows all the shortcodes available with Weaver X Theme Support.
-Most of the shortcode tabs provide a brief summary of the shortcodes options.
-The "Slider" shortcode includes some settings needed to enable some of its features.</p>
+Most of the shortcode tabs provide a brief summary of the shortcodes options.</p>
 
 <p style="font-weight:bold;">You can get more complete help for any of these shortcodes by clicking the "Shortcode Help" tab.</p>
 
@@ -145,8 +144,8 @@ The "Slider" shortcode includes some settings needed to enable some of its featu
 <ul>
     <li><b>Tab Group - [tab_group]</b> - Display content on separate tabs</li>
     <li><b>Hide Mobile - [hide_mobile]</b> - Hide content on devices - phone, smalltablet, desktop</li>
-    <li><b>Show If Logged In - [show_if_logged_in]</b> - Show content only if logged in</li>
-    <li><b>Hide If Logged In - [hide_if_logged_in]</b> - Hide content if logged in</li>
+    <li><b>Show If- [show_if]</b> - Show content only if args meet specified conditions</li>
+    <li><b>Hide If - [hide_if]</b> - Hide content</li>
     <li><b>Header Image - [header_image]</b> - Display default header image</li>
     <li><b>HTML - [html]</b> - Wrap content in any HTML tag</li>
     <li><b>DIV - [div]text[/div]</b> - Wrap content in a &lt;div&gt; tag</li>
@@ -154,7 +153,6 @@ The "Slider" shortcode includes some settings needed to enable some of its featu
     <li><b>iFrame - [iframe]</b> - Display external content in an iframe</li>
     <li><b>Site Title - [site_title]</b> - Display the site title</li>
     <li><b>Site Tagline - [site_tagline]</b> - Display the site tagline</li>
-    <li><b>User Can - [user_can role="role" alttext="text if can't'"] if has role[/user_can]</b> - Display content if user has given role</li>
     <li><b>Blog Info - [bloginfo]</b> - Display blog info as provided by WordPress bloginfo function</li>
     <li><b>Vimeo - [vimeo]</b> - Display video from Vimeo responsively, with options</li>
     <li><b>YouTube - [youtube]</b> - Display video from YouTube responsively, with options</li>

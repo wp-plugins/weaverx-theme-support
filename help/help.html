@@ -281,9 +281,8 @@ h1 {
 <li><strong><a href="#headerimage">[header_image] Shortcode</a></strong></li>
 <li><strong><a href="#schtml">[html]</a></strong></li>
 <li><strong><a href="#schtml">[div]text[/div]</a></strong></li>
-<li><strong><a href="#sciframe">iframe - [iframe]</a></strong></li>
-<li><strong><a href="#showhidemobile">[hide_mobile]</a></strong></li>
-<li><strong><a href="#showhideloggedin">[show_if_logged_in] / [hide_if_logged_in]</a></strong></li>
+<li><strong><a href="#sciframe"> [iframe]</a></strong></li>
+<li><strong><a href="#showhidemobile">[hide_if]</a></strong></li>
 <li><strong><a href="#sitetitlesc">[site_title], [site_tagline]</a></strong></li>
 <li><strong><a href="#bloginfo">[bloginfo arg='name' style='your css']</a></strong></li>
 <li><strong><a href="#video">Video - [vimeo], [youtube]</a></strong></li>
@@ -298,8 +297,8 @@ h1 {
     </ul>
     <h3><a name="summary" id="summary"></a>Plugin Summary </h3>
     <p>The Weaver X Theme Support Plugin provides a collection of shortcodes to allow you to easily add extra content and features to your regular content. These shortcodes will work with almost any WordPress theme. </p>
-<p>While these shortcodes should prove useful with most any theme, one of the goals of these shortcodes is to provide an alternative to users of theWeaver X theme.</p>
-<h2><a name="admin_page" id="admin_page"></a>Weaver X Theme Extras Admin Page</h2>
+<p>While these shortcodes should prove useful with most any theme, one of the goals of these shortcodes is to provide an alternative to users of the Weaver X theme.</p>
+<h2><a name="admin_page" id="admin_page"></a>Weaver Xtreme Theme Extras Admin Page</h2>
 <p>This plugin has just a few options, all found on the Weaver X Theme Support admin page under the WordPress dashboard Appearance section.</p>
 <h2><a name="sc_summary" id="sc_summary"></a>Shortcode Summary</h2>
 <h3><a name="tab_group" id="tab_group"></a>[tab_group] - content in tabs </h3>
@@ -323,7 +322,7 @@ You can supply values for these parameters to control the look of the tabbed sec
     <li><b>pane_bg</b>: bg color of pane</li>
 </ul>
 </p>
-<h3><a name="headerimage" id="headerimage"></a><strong>[header_image] Shortcode</strong></h3>
+<h3><a name="headerimage" id="headerimage"></a><strong>[header_image]</strong></h3>
 <p>The <code>[header_image]</code> shortcode allows you display the current header image wherever you want.
   For example, you can get the header image into the Header Widget Area by using this shortcode in a text widget.
   The current standard or mobile header image will be displayed. Only the <code>&lt;img ... &gt;</code> is displayed --
@@ -401,38 +400,65 @@ the URL for the external site, and optionally a height. This shortcode automatic
 </ol>
 </p>
 
-<h3><a name="showhidemobile" id="showhidemobile"></a><strong>[hide_mobile]</strong></h3>
-<p>The <code>[hide_mobile]</code>shortcode allows you to selectively
-display content depending if the visitor is using a standard browser or a mobile device browser. You might want
-to disable a video on mobile devices.</p>
+<h3><a name="showhidemobile" id="showhidemobile"></a><strong>[show_if]content[/show_if], [hide_if]</strong>content [/hide_if]</h3>
+<p>The <code>[show_if]</code> and <code>[hide_if]</code> shortcodes allow you to selectively
+display or hide content depending if any of several conditions are met.</p>
 
-<p><strong>Shortcode usage:</strong> <code>[hide_mobile phone=0|1 smalltablet=0|1 desktop=0|1]content to hide[/hide_mobile]</code>
+<p><strong>Shortcode usage:</strong> <code>[hide_if device=device logged_in=true/false not_post_id=id-list post_id=id-list user_can=what]</code>
 </p>
-<p>You bracket the content you want to selectively display with <code>[hide_mobile]</code> and closing
-<code>[/hide_mobile]</code> tags. That content can contain other shortcodes as needed.
-</p>
+<p>You bracket the content you want to selectively display with <code>[show/hide_if]</code> and closing
+<code>[/show/hide_if]</code> tags. That content can contain other shortcodes as needed. If you specify more than one parameter to the short code, then all the conditions must be met (logical AND). Any paramaters you don't include are considered true.</p>
+<h4>Parameters</h4>
+<p>'device'    =&gt; 'default',       // desktop, mobile, smalltablet, phone, all<br />
+'logged_in' =&gt; 'default',       // true or false<br />
+'not_post_id' =&gt; 'default',     // comma separated list of post IDs (includes pages, too)<br />
+'post_id'   =&gt; 'default',       // comma separated list<br />
+'user_can'  =&gt; 'default'        // http://codex.wordpress.org/Function_Reference/current_user_can</p>
 <p>
-The parameters for <code>[hide_mobile]</code> are designed to allow you to hide <em>or</em> show any content on and of the
-three device sizes recognized by Weaver X: 'phone', 'smalltablet', and 'desktop'. If you want to <strong>hide</strong> content on
-a specific device, you give the appropriate parameter a value of 1 (e.g., <code>[hide_mobile desktop=1]</code>). If you want to <strong>show</strong> content
-on a specific device, you give the parameter a value of 0 (e.g., <code>[hide_mobile phone=0]</code>). Because this shortcode will typically be
-used to <em>hide</em> content, the default is to hide on 'phone' and 'smalltablet' if you don't specify any values. So,
-<code>[hide_mobile]content[/hide_mobile]</code> is the same as <code>[hide_mobile phone=1 smalltablet=1 desktop=0]content[/hide_mobile]</code>. You can use
-the default values, or always specify 'phone', 'smalltablet', and 'desktop'.
-</p>
-
-
-<h3><a name="showhideloggedin" id="showhideloggedin"></a><strong>[show_if_logged_in] / [hide_if_logged_in]</strong></h3>
-
-<p>The <code>[show_if_logged_in]</code> and <code>[hide_if_logged_in]</code>shortcodes allow you to selectively
-display content depending if the visitor is logged in or not.</p>
-
-<p><strong>Shortcode usage:</strong> <code>[show_if_logged_in]content to show[/show_if_logged_in]</code>
-</p>
-<p>You bracket the content you want to selectively display with <code>[show_if_logged_in] or [hide_if_logged_in]</code> and closing tags <code>[/show_if_logged_in]</code> or
-<code>[/hide_if_logged_in]</code>. That content can contain other shortcodes as needed. </p>
-
-
+<strong>device=desktop | mobile | smalltablet | phone </strong> - The device parameter for <code>[show/hide_if]</code> is designed to allow you to hide <em>or</em> show any content on any of the
+ device sizes recognized by Weaver Xtreme (or any theme, actually): 'phone', 'smalltablet', and 'desktop', or 'mobile' for non-desktop devices. If you want to show or hide content on
+a specific device, you give the <span class="code1">device</span> parameter a value of desktop, mobile, smalltablet, phone, or none (e.g., <code>[show_if device=mobile]</code>). </p>
+<p><strong>logged_in=true | false</strong> - This will hide or display content depending if the visitor is logged into the site or not. </p>
+<p><strong>post_id=34,875</strong> / <strong>not_post_id=1,2,3 </strong>- This will display (or not display) the content depending if the current page or single post view is included in the comma separated list of WordPress page/post IDs. You can use both to refine a list of pages or posts to display or not display. Note that even though the parameter is called 'post_id', it applies equally to pages and posts. Depending on where you use the shortcode, it will apply to a post differently depending if it is on a blog or single page view of a post. Note that the default WordPress blog (as opposed to the Weaver Xtreme Page with Posts template) does not have a post_ID.</p>
+<p><strong>user_can=user-capability</strong> - This will show or hide depending if the current visitor has certain WordPress user capabilities. There are many capabilities which are defined in the <a href="http://codex.wordpress.org/Function_Reference/current_user_can" target="_blank">WordPress Codex</a>. This shortcode supports any of the listed capabilities for maximum flexibility. If you don't want to learn about all the capabilities listed in the Codex, you can use the following capability values to determine if the visitor has a specific role (as defined on the Dashboard Users admin pages). For example:<br />
+  <br />
+  <span class="code1">[show_if user_can=publish_pages]content for Editors and above[/show_if]</span><br />
+  <br /> 
+  Note that the higher roles have all the capabilities of the lower roles - an Editor can do everything a Contributor can.</p>
+<table width="80%" border="1">
+  <caption>
+    Capabilities to Specify Role
+    </caption>
+  <tr>
+    <th scope="col">Role</th>
+    <th scope="col">Capability</th>
+  </tr>
+  <tr>
+    <td>Subscriber</td>
+    <td>read</td>
+  </tr>
+  <tr>
+    <td>Contributor</td>
+    <td>edit_posts</td>
+  </tr>
+  <tr>
+    <td>Author</td>
+    <td>publish_posts</td>
+  </tr>
+  <tr>
+    <td>Editor</td>
+    <td>publish_pages</td>
+  </tr>
+  <tr>
+    <td>Administrator</td>
+    <td>manage_options</td>
+  </tr>
+  <tr>
+    <td>Super Administrator (MultiSite)</td>
+    <td>manage_network</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
 <h3><a name="sitetitlesc" id="sitetitlesc"></a><strong>[site_title], [site_tagline]</strong></h3>
 
 <p>The <code>[site_title]</code> and <code>[site_tagline]</code> shortcodes allow you display the current
@@ -461,20 +487,18 @@ Some useful values include 'stylesheet_directory' and 'template_directory'. You 
 <p>Weaver X Theme Support supports specialized shortcodes to display video. While there are other ways to embed video, the Weaver X Theme Support versions have two important features. First, they will auto adjust to the width of your content, <em><strong>including</strong></em> the mobile view. Second, they use the latest iframe/HTML5 interface provided by YouTube and Vimeo.</p>
 <p><strong>Specifying Video Display Size for both shortcodes</strong></p>
 <p>Weaver X Theme Support supports a common set of options for both the YouTube and Vimeo shortcodes to support displaying your videos with a specific width and correct height. By default, your videos will be displayed using the full width of the content area being used (percent=100). The percent= parameter is used to specify the width you want.</p>
-<p>The height of the video is automatically determined based on the width and the display ratio of the particular video. By default, Weaver X Theme Support will assume a widescreen 9:16 ratio (height is width*0.5625). If you specify 'sd=1', then standard def ratio is assumed (3:4 ratio - height is width*0.75). If you have a custom sized video clip, you may also specify an exact ratio (e.g., 3:9, or ratio=.333). Both Vimeo and YouTube will accept videos with custom ratios, but they must be generated correctly without any letterboxing to display correctly.</p>
+<p>The height of the video is automatically determined based on the width and the display ratio of the particular video. </p>
 <p>Finally, you may specify if the video should be centered or no within the display area using &quot;center=0&quot; to not center (centering is on by default).</p>
 <p>Note - if you want to display more than one video horizontally, use &quot;center=0&quot; and specify an appropriate percentage to fit all the videos.</p>
 <p>Parameters in Common</p>
 <ul>
   <li>percent=100 - By default, the video will be sized to fill the full content space. You can use the percent value to make
   the video use a percentage of the content space (but mobile will always use full width).</li>
-  <li>ratio=0.5625 - By default, Weaver X Theme Support assumes your video will be a standard 9:16 widescreen video. You can get Standard Def videos by using &quot;sd=1&quot; or &quot;ratio=.075&quot;. You can also specify a custom ratio.</li>
   <li>center=1 - Specify 'center=0' to disable centering of the video.</li>
   <li>sd=0 - By default, Weaver X Theme Support will generate sizes for HD/widescreen videos. To display old 4:3 standard definition videos, include 'sd=1' in the shortcode.</li>
-  <li>w=640 - By default, the [vimeo/youtube] shortcode will use the percent value to determine size of the video. A short JavaScript is provided to responsively display videos. You can override the percent and display a fixed size. This is required for proper display in a [slider], or if you've enabled the FitVids option on the Video tab of the Weaver X Theme Support admin tab.</li>
 </ul>
 <h4>Vimeo</h4>
-<pre><strong>[vimeo vimeo-url id=videoid sd=0 percent=100 ratio=0.5625 center=1 color=#hex
+<pre><strong>[vimeo vimeo-url id=videoid sd=0 percent=100 center=1 color=#hex
    autoplay=0 loop=0 portrait=1 title=1 byline=1]
 </strong></pre>
 <p>This will display Vimeo videos. At the minimum, you can provide the standard http://vimeo.com/nnnnn link, or just the video ID number (which is part of the Vimeo Link). The other Vimeo specific options include:</p>
@@ -487,7 +511,7 @@ Some useful values include 'stylesheet_directory' and 'template_directory'. You 
   </li>
 </ul>
 <h4>YouTube</h4>
-<code><strong>[youtube youtube-url id=videoid sd=0  percent=100 ratio=0.5625 center=1 rel=1 https=0 privacy=0 {youtube options}]
+<code><strong>[youtube youtube-url id=videoid sd=0  percent=100  center=1 rel=1 https=0 privacy=0 {youtube options}]
 </strong></code>
 <p>This will display YouTube videos. At the minimum, you can provide the standard http://youtu.be/xxxxxx share link (including the options YouTube lets you specify), the long format share link, or just the video ID number using the id=videoid parameter (which is part of the YouTube Link). The other YouTube specific options include:</p>
 <ul>

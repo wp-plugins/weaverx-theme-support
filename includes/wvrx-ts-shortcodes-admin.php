@@ -15,8 +15,7 @@ function wvrx_ts_headerimg_admin() {
     <span style="color:blue;font-weight:bold; font-size: larger;"><b>Header Image - [header_image]</b></span>&nbsp;
 <?php wvrx_ts_help_link('help.html#headerimage','Help for Header Image');
 ?>
-<br />
-<span style="font-style:italic;margin-left:2em;">;Alternative names:</span> <code>[weaver_header_image], [header_image]</code>
+
 <br />
 <p>The <code>[header_image]</code> shortcode allows you display the current header image wherever you want.
 For example, you can get the header image into the Header Widget Area by using this shortcode in a text widget.
@@ -47,8 +46,6 @@ function wvrx_ts_sc_html_admin() {
 <?php wvrx_ts_help_link('help.html#schtml','Help for HTML Shortcode');
 ?>
 <br />
-<span style="font-style:italic;margin-left:2em;">;Alternative names:</span> <code>[weaver_html], [html ...]</code>
-<br />
 <p>The Weaver X <code>[html]</code> shortcode allows you to add arbitrary HTML to your post and page content. The
 main purpose of this shortcode is to get around the auto paragraph and line break and other HTML stripping functionality
 of the WordPress editor. See the Help document for more details.</p>
@@ -74,8 +71,6 @@ function wvrx_ts_sc_div_admin() {
     <label><span style="color:blue;font-weight:bold; font-size: larger;"><b>DIV - [div]text[/div]<br />SPAN - [span]text[/span]</b></span></label>&nbsp;
 <?php wvrx_ts_help_link('help.html#scdiv','Help for div Shortcode');
 ?>
-<br />
-<span style="font-style:italic;margin-left:2em;">;Alternative names:</span> <code>[weaver_div], [div]</code>
 <br />
 <p>The Weaver X <code>[div]</code> and <code>[span]</code> shortcodes allow easily add HTML &lt;div&gt; and &lt;span&gt; tags
 to your post and page content. The main purpose of these shortcodes is to get around need to switch to the HTML editor view when you need to
@@ -104,8 +99,7 @@ function wvrx_ts_sc_iframe_admin() {
     <label><span style="color:blue;font-weight:bold; font-size: larger;"><b>iFrame - [iframe]</b></span></label>&nbsp;
 <?php wvrx_ts_help_link('help.html#sciframe','Help for iFrame');
 ?>
-<br />
-<span style="font-style:italic;margin-left:2em;">;Alternative names:</span> <code>[weaver_iframe], [iframe]</code>
+
 <br />
 <p>The <code>[iframe]</code> shortcode allows you easily display the content of an external site. You simply have to specify
 the URL for the external site, and optionally a height. This shortcode automatically generates the correct HTML &lt;iframe&gt; code.</p>
@@ -143,7 +137,7 @@ to disable a video on mobile devices.</p>
 <code>[/hide_mobile]</code> tags. That content can contain other shortcodes as needed.
 </p>
 <p>
-The parameters for <code>[hide_mobile]</code> are designed to allow you to hide <em>or</em> show any content on and of the
+The parameters for <code>[hide_mobile]</code> are designed to allow you to hide <em>or</em> show any content on any of the
 three device sizes recognized by Weaver X: 'phone', 'smalltablet', and 'desktop'. If you want to <strong>hide</strong> content on
 a specific device, you give the appropriate parameter a value of 1 (e.g., <code>[hide_mobile desktop=1]</code>). If you want to <strong>show</strong> content
 on a specific device, you give the parameter a value of 0 (e.g., <code>[hide_mobile phone=0]</code>). Because this shortcode will typically be
@@ -161,8 +155,7 @@ function wvrx_ts_showhide_logged_in_admin() {
 ?>
 <br />
 <label><span style="color:blue;font-weight:bold; font-size: larger;"><b>Hide If Logged In - [hide_if_logged_in]</b></span></label>
-<br />
-<span style="font-style:italic;margin-left:2em;">Alternative names:</span> <code>[weaver_show/hide_if_logged_in], [show/hide_if_logged_in]</code>
+
 <br />
 <p>The <code>[show_if_logged_in]</code> and <code>[hide_if_logged_in]</code>shortcodes allow you to selectively
 display content depending if the visitor is logged in or not.</p>
@@ -181,8 +174,7 @@ function wvrx_ts_show_posts_admin() {
 ?>
 <label><span style="color:blue;font-weight:bold; font-size: larger;"><b>Show Posts - [show_posts]</b></span></label>&nbsp;
 <?php wvrx_ts_help_link('help.html#showposts','Help for Weaver X Theme Support'); ?>
-<br />
-<span style="font-style:italic;margin-left:2em;">Alternative names:</span> <code>[weaver_show_posts], [show_posts]</code>
+
 <br />
 <p>The Weaver X <code>[show_posts]</code> shortcode allows you to display posts on your pages or in a text widget
 in the sidebar. You can specify a large number of filtering options to select a specific set of posts to show.</p>
@@ -207,8 +199,7 @@ function wvrx_ts_sitetitle_admin() {
 <br />
 <span style="color:blue;font-weight:bold; font-size: larger;"><b>Site Tagline - [site_tagline]</b></span>
 
-<br />
-<span style="font-style:italic;margin-left:2em;">Alternative names:</span> <code>[weaver_site_title/desc], [site_title/desc]</code>
+
 <br />
 <p>The <code>[site_title]</code> and <code>[site_tagline]</code> shortcodes allow you display the current
 site title and site tagline. (Site Tagline was formerly called Site Description.) This can be useful in a text widget in the Header Widget Area, for example.</p>
@@ -237,16 +228,14 @@ function wvrx_ts_video_admin() {
 <br /><label><span style="color:blue;font-weight:bold; font-size: larger;"><b>YouTube - [youtube]</b></span></label>
 <br />
 
-<br />
-<span style="font-style:italic;margin-left:2em;">Alternative names:</span> <code>[weaver_vimeo/youtube], [vimeo/youtube]</code>
-<br />
-<p>The Weaver X Theme Support plugin supports specialized shortcodes to display video. While there are other ways to embed video, the Weaver X versions have two important features. First, when used with the Weaver X theme, they will auto adjust to the width of your content, <em><strong>including</strong></em> the mobile view. Second, they use the latest iframe/HTML5 interface provided by YouTube and Vimeo.</p>
+
+<p>The Weaver X Theme Support plugin supports specialized shortcodes to display video. While there are other ways to embed video, the Weaver X versions have some extra important features. First, when used with the Weaver X theme, they will auto adjust to the width of your content, <em><strong>including</strong></em> the mobile view. They also use the latest iframe/HTML5 interface provided by YouTube and Vimeo. And, you can specify a max-width (percent) and centering.</p>
 <h4>Vimeo</h4>
-<strong>Shortcode usage:</strong> <code>[vimeo vimeo-url id=videoid sd=0 w=640/percent=100 ratio=.5625 center=1 color=#hex autoplay=0 loop=0 portrait=1 title=1 byline=1]</code>
+<strong>Shortcode usage:</strong> <code>[vimeo vimeo-url id=videoid sd=0 percent=100 center=1 color=#hex autoplay=0 loop=0 portrait=1 title=1 byline=1]</code>
 
 <p>This will display Vimeo videos. At the minimum, you can provide the standard http://vimeo.com/nnnnn link, or just the video ID number (which is part of the Vimeo Link). The other options are explained in the Help document</p>
 <h4>YouTube</h4>
-<strong>Shortcode usage:</strong> <code>[youtube youtube-url id=videoid sd=0 w=640/percent=100 ratio=.5625 center=1 rel=0 https=0 privacy=0  see_help_for_others]</code>
+<strong>Shortcode usage:</strong> <code>[youtube youtube-url id=videoid sd=0 percent=100 center=1 rel=0 privacy=0  see_help_for_others]</code>
 <p>This will display YouTube videos. At the minimum, you can provide the standard http://youtu.be/xxxxxx share link (including the options YouTube lets you specify), the long format share link, or just the video ID number (which is part of the YouTube Link). The other options are explained in the Help document</p>
 <p>Specifying a percent will cause the video to be displayed using that percentage of the width of the containing element (content, widget).The videos will auto-resize as you shrink the browser width. If you specify a width (w=640), then that width will be used,
 overriding any percent you may have specified, and
@@ -256,7 +245,7 @@ the videos will not auto-shrink. This setting is useful when used with an [slide
 
 <p>
 When used with the Weaver X theme, the videos displayed by these shortcodes, and in fact any videos displayed using standard
-YouTube or Vimeo embed codes, will be automatically responsively sized using the FitVids script.
+YouTube or Vimeo embed codes or WordPress auto video link recognition, will be automatically responsively sized using the FitVids script.
 </p>
 
 <?php
@@ -267,8 +256,7 @@ function wvrx_ts_tabgroup_admin() {
 ?>
     <label><span style="color:blue;font-weight:bold; font-size: larger;"><b>Tab Group - [tab_group]</b></span></label>&nbsp;
 <?php wvrx_ts_help_link('help.html#tab_group','Help for [tab_group]'); ?>
-<br />
-<span style="font-style:italic;margin-left:2em;">Alternative names:</span> <code>[weaver_tab_group], [tab_group]</code>
+
 <br />
 <p>Show content displayed on tabbed pages.</p>
 <p><strong>Shortcode usage:</strong><br>
