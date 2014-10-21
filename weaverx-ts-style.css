@@ -31,14 +31,26 @@ without modifying theme or plugin .css files.
 
 @media screen and (min-width:768px) {  /* rules for desk top */
 .atw-hide-desktop {display:none !important;}
+.atw-hide-all {display:none !important;}
+.atw-show-phone {display:none !important;}
+.atw-show-mobile {display:none !important;}
+.atw-show-smalltablet {display:none !important;}
 }
 
 @media screen and (min-width:581px) and (max-width:767px) {  /* rules for small tablets */
 .atw-hide-smalltablet {display:none !important;}
+.atw-hide-mobile {display:none !important;}
+.atw-hide-all {display:none !important;}
+.atw-show-desktop {display:none !important;}
+.atw-show-phone {display:none !important;}
 }
 
 @media screen and (max-width:580px) {  /* rules for phones */
 .atw-hide-phone {display:none !important;}
+.atw-hide-mobile {display:none !important;}
+.atw-hide-all {display:none !important;}
+.atw-show-desktop {display:none !important;}
+.atw-show-smalltablet {display:none !important;}
 }
 
 /* Tabs */

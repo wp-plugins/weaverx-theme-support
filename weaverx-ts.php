@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WeaverX Theme Support
+Plugin Name: Weaver X Theme Support
 Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.1
+Version: 0.5
 
 License: GPL
 
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* CORE FUNCTIONS
 */
 
-define ('WVRX_TS_VERSION','0.1');
+define ('WVRX_TS_VERSION','0.5');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 
 function wvrx_ts_installed() {
@@ -45,7 +45,7 @@ function wvrx_ts_admin() {
 
 function wvrx_ts_admin_menu() {
     $page = add_theme_page(
-	  'Weaver X Theme Support by WeaverTheme.com','&nbsp;Theme Support','manage_options','wvrx_ts', 'wvrx_ts_admin');
+	  'Weaver X Theme Support by WeaverTheme.com','<small>&times;Theme Support</small>','manage_options','wvrx_ts', 'wvrx_ts_admin');
 	/* using registered $page handle to hook stylesheet loading for this admin page */
     add_action('admin_print_styles-'.$page, 'wvrx_ts_admin_scripts');
 }
@@ -72,7 +72,10 @@ function wvrx_ts_enqueue_scripts() {	// action definition
 
     //-- Weaver X PLus js lib - requires jQuery...
 
-    wp_enqueue_script('wvrxtsJSLib', wvrx_ts_plugins_url('/js/wvrx-ts-jslib', WVRX_TS_MINIFY . '.js'),array('jquery'),WVRX_TS_VERSION);
+
+    // put the enqueue script in the tabs shortcode where it belongs
+
+    //wp_enqueue_script('wvrxtsJSLib', wvrx_ts_plugins_url('/js/wvrx-ts-jslib', WVRX_TS_MINIFY . '.js'),array('jquery'),WVRX_TS_VERSION);
 
 
     // add plugin CSS here, too.
@@ -86,7 +89,7 @@ add_action('wp_enqueue_scripts', 'wvrx_ts_enqueue_scripts' );
 function wvrx_ts_footer() {
 }
 
-add_action('wp_footer','wvrx_ts_footer', 9);	// make it 9 so we can dequeue bxSlider script
+add_action('wp_footer','wvrx_ts_footer', 9);
 
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-runtime-lib.php'); // NOW - load the basic library
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-widgets.php'); 		// widgets runtime library

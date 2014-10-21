@@ -11,9 +11,9 @@ function wvrx_ts_setup_shortcodes() {
 	array('html' => 'wvrx_ts_sc_html'),		// [html]
 	array('span' => 'wvrx_ts_sc_span'),	    // [span]
 
-	array('hide_if_logged_in' => 'wvrx_ts_sc_hide_if_logged_in' ),	      		// [hide_if_logged_in]
+    array('hide_if' => 'wvrx_ts_sc_hide_if' ),	      		// [hide_if]
 
-	array('hide_mobile' => 'wvrx_ts_sc_hide_if_mobile'),      		// [hide_mobile]
+    array('show_if' => 'wvrx_ts_sc_show_if' ),	      		// [show_if]
 
 	array('bloginfo' => 'wvrx_ts_sc_bloginfo'),      // [bloginfo]
 
@@ -27,8 +27,6 @@ function wvrx_ts_setup_shortcodes() {
 
 	array('tab_group' => 'wvrx_ts_sc_tab_group',
           'tab' => 'wvrx_ts_sc_tab'),               // [tab_group], [tab]
-
-	array('user_can' => 'user_can'),                // [user_can]
 
 	array('vimeo' => 'wvrx_ts_sc_vimeo'),           // [vimeo]
 
@@ -45,8 +43,87 @@ function wvrx_ts_setup_shortcodes() {
 
 add_action('init', 'wvrx_ts_setup_shortcodes');  // allow shortcodes to load after theme has loaded so we know which version to use
 
+// ===============  [hide_if] ===================
+function wvrx_ts_sc_hide_if($args = '', $text ) {
 
-// ===============  [weaver_header_image style='customstyle'] ===================
+    return wvrx_ts_show_hide_if( $args, $text, false );
+}
+
+// ===============  [show_if] ===================
+function wvrx_ts_sc_show_if($args = '', $text ) {
+    return wvrx_ts_show_hide_if( $args, $text, true );
+}
+
+// ===============  [show_hide_if] ===================
+function wvrx_ts_show_hide_if($args = '', $text, $show) {
+    extract(shortcode_atts(array(
+        'device'    => 'default',       // desktop, mobile, smalltablet, phone, all
+	    'logged_in' => 'default',       // true or false
+        'not_post_id' => 'default',     // comma separated list of post IDs (includes pages, too)
+        'post_id'   => 'default',       // comma separated list
+        'user_can'  => 'default'        // http://codex.wordpress.org/Function_Reference/current_user_can
+    ), $args));
+
+    if ( $logged_in == 'default' ) {            // **** logged_in
+        $logged_in = true;
+    } else {
+        $is_true = is_user_logged_in();
+        $logged_in = ( $logged_in == 'true' || $logged_in == '1' ) ? $is_true : !$is_true;
+    }
+
+    if ( $not_post_id == 'default') {                 // **** pages
+        $not_post_id = true;
+    } else {
+        $list = explode(',', str_replace(' ', '', $not_post_id));
+        $not_post_id = in_array( get_the_ID(), $list );
+    }
+
+    if ( $post_id == 'default') {                 // **** pages
+        $post_id = true;
+    } else {
+        $list = explode(',', str_replace(' ', '', $post_id));
+        $post_id = in_array( get_the_ID(), $list );
+    }
+
+    if ( $user_can == 'default') {              // **** user_can
+        $user_can = true;
+    } else {
+        $user_can = current_user_can( strtolower( $user_can) );
+    }
+
+    $x = true;
+    if ( $x == 'default') {
+        $x = true;
+    } else {
+        $x = $show;
+    }
+
+    $do_show = $logged_in && $not_post_id && $post_id && $user_can;
+    if ( !$show )
+        $do_show = !$do_show;
+
+    if ( $do_show ) {
+        if ( $device == 'default' ) {
+            return do_shortcode( $text );
+        } else {
+            $GLOBALS['wvrx_sc_show_hide'] = strtolower('show-' . $device);  // for [extra_menu]
+            $ret = '<div class="atw-' . $GLOBALS['wvrx_sc_show_hide'] . '">' . do_shortcode($text) . '</div>';
+            unset( $GLOBALS['wvrx_sc_show_hide'] );
+            return $ret;
+        }
+    }
+    if ( $device == 'default' ) {       // still have to do the show/hide device option
+            return '';
+    } else {
+        $GLOBALS['wvrx_sc_show_hide'] = strtolower('hide-' . $device);
+        $ret =  '<div class="atw-' . $GLOBALS['wvrx_sc_show_hide'] . '">' . do_shortcode($text) . '</div>';
+        unset( $GLOBALS['wvrx_sc_show_hide'] );
+        return $ret;
+    }
+}
+
+
+// ===============  [header_image style='customstyle'] ===================
 function wvrx_ts_sc_header_image($args = ''){
     extract(shortcode_atts(array(
 	    'style' => '',	// STYLE
@@ -64,7 +141,7 @@ function wvrx_ts_sc_header_image($args = ''){
     return $hdrimg;
 }
 
-// ===============  [weaver_bloginfo arg='name'] ======================
+// ===============  [bloginfo arg='name'] ======================
 function wvrx_ts_sc_bloginfo($args = '') {
     extract(shortcode_atts(array(
 	    'arg' => 'name',		// a WP bloginfo name
@@ -78,7 +155,7 @@ function wvrx_ts_sc_bloginfo($args = '') {
     return $code;
 }
 
-// ===============  [weaver_site_title style='customstyle'] ======================
+// ===============  [site_title style='customstyle'] ======================
 function wvrx_ts_sc_site_title($args = '') {
     extract(shortcode_atts(array(
 	    'style' => ''		/* styling for the header */
@@ -92,7 +169,7 @@ function wvrx_ts_sc_site_title($args = '') {
 
 }
 
-// ===============  [weaver_site_title style='customstyle'] ======================
+// ===============  [site_title style='customstyle'] ======================
 function wvrx_ts_sc_site_tagline($args = '') {
     extract(shortcode_atts(array(
 	    'style' => ''		/* styling for the header */
@@ -105,7 +182,7 @@ function wvrx_ts_sc_site_tagline($args = '') {
     return $title;
 }
 
-// ===============  [weaver_iframe src='address' height=nnn] ======================
+// ===============  [iframe src='address' height=nnn] ======================
 function wvrx_ts_sc_iframe($args = '') {
     extract(shortcode_atts(array(
 	    'src' => '',
@@ -120,44 +197,6 @@ function wvrx_ts_sc_iframe($args = '') {
     return "\n" . '<iframe src="' . $src . '" height="' .  $height . 'px" width="' . $percent . '%"' . $sty . '></iframe>' . "\n";
 }
 
-// ===============  [weaver_show_if_mobile style='customstyle'] ======================
-
-function wvrx_ts_sc_hide_if_mobile($args = '', $text) {
-
-    extract(shortcode_atts(array(
-	    'phone' => true,
-        'smalltablet' => true,
-        'desktop' => false,
-    ), $args));
-
-    $class = '';
-    if ( $phone )
-        $class = 'atw-hide-phone ';
-    if ( $smalltablet )
-        $class .= 'atw-hide-smalltablet ';
-    if ( $desktop )
-        $class .= 'atw-hide-desktop';
-    $class = trim($class);
-
-    return '<span class="' . $class . '">' . do_shortcode($text) . '</span>';
-}
-
-// ===============  [weaver_show_if_logged_in] ======================
-function wvrx_ts_sc_show_if_logged_in($args = '',$text) {
-
-    if (is_user_logged_in()) {
-	return do_shortcode($text);
-    }
-    return '';
-}
-
-function wvrx_ts_sc_hide_if_logged_in($args = '',$text) {
-
-    if (!is_user_logged_in()) {
-	return do_shortcode($text);
-    }
-    return '';
-}
 
 
 // ===============  [tab_group ] ======================
@@ -173,6 +212,10 @@ function wvrx_ts_sc_tab_group( $args, $content ) {
     if (isset($GLOBALS['wvrx_ts_in_tab_container']) && $GLOBALS['wvrx_ts_in_tab_container']) {
 	return '<strong>Sorry, you cannot nest tab_containers.</strong>';
     }
+
+    // enqueue the theme support jslib only now when it will actually be needed!
+
+    wp_enqueue_script('wvrxtsJSLib', wvrx_ts_plugins_url('/js/wvrx-ts-jslib', WVRX_TS_MINIFY . '.js'),array('jquery'),WVRX_TS_VERSION,true);
 
     if ( !isset( $GLOBALS['wvrx_ts_tab_id'] ) )
         $GLOBALS['wvrx_ts_tab_id'] = 1;
@@ -247,24 +290,7 @@ function wvrx_ts_sc_tab( $args, $content ) {
 }
 
 
-// =============== [user_can] ===================
-function wvrx_ts_sc_user_can($args = '',$content='') {
-    extract( shortcode_atts( array(
-	'role' => '',
-	'alttext' => '',
-    'not' => false
-    ), $args ) );
-
-    $code = '';
-    if ($role != '' && (!$not && current_user_can($role)) ) {
-        $code = do_shortcode($content);
-    } else {
-        $code = $alttext;
-    }
-    return $code;
-}
-
-// ===============  [weaver_youtube id=videoid sd=0 hd=0 related=0 https=0 privacy=0 w=0 h=0] ======================
+// ===============  [youtube id=videoid sd=0 hd=0 related=0 https=0 privacy=0 w=0 h=0] ======================
 function wvrx_ts_sc_youtube($args = '') {
     $share = '';
     if ( isset ( $args[0] ) )
@@ -277,7 +303,6 @@ function wvrx_ts_sc_youtube($args = '') {
         'id' => '',
         'sd' => false,
         'related' => '0',
-        'https' => false,
         'privacy' => false,
         'ratio' => false,
         'center' => '1',
@@ -304,7 +329,6 @@ function wvrx_ts_sc_youtube($args = '') {
         'showsearch' => '1',
         'start' => false,
         'theme' => 'dark',
-        'w' => '~!',
         'wmode' => 'transparent'
 
     ), $args));
@@ -313,12 +337,14 @@ function wvrx_ts_sc_youtube($args = '') {
         return '<strong>No share or id values provided for youtube shortcode.</strong>';
 
     if ($share)	{	// let the share override any id
-        $share = str_replace('http://youtu.be/','',$share);
+        $share = str_replace('youtu.be/','',$share);
         if (strpos($share,'youtube.com/watch') !== false) {
-            $share = str_replace('http://www.youtube.com/watch?v=', '', $share);
+            $share = str_replace('www.youtube.com/watch?v=', '', $share);
             $share = str_replace('&amp;','+',$share);
             $share = str_replace('&','+',$share);
         }
+        $share = str_replace('http://','',$share);
+        $share = str_replace('https://','',$share);
         if ($share)
             $id = $share;
     }
@@ -348,8 +374,7 @@ function wvrx_ts_sc_youtube($args = '') {
     $opts = wvrx_ts_add_url_opt($opts, $theme != 'dark', 'theme=light');
     $opts = wvrx_ts_add_url_opt($opts, $wmode, 'wmode='.$wmode);
 
-    if ($https) $url = 'https://';
-    else $url = 'http://';
+    $url = '//';
 
     if ($privacy) $url .= 'www.youtube-nocookie.com';
     else $url .= 'www.youtube.com';
@@ -360,58 +385,47 @@ function wvrx_ts_sc_youtube($args = '') {
 
     $url .= '/embed/' . $opts;
 
-    $vert = $sd ? 0.75 : 0.5625;
-    if ($ratio) $vert = $ratio;
 
-    $allowfull = $fullscreen ? ' allowfullscreen' : '';
-    $cntr1 = $center ? '<div style="text-align:center">' : '';
-    $cntr2 = $center ? '</div>' : '';
+    $allowfull = $fullscreen ? ' allowfullscreen="allowfullscreen"' : '';
 
-    if (wvrx_ts_getopt('video_fitvids') && $w == '~!') {	// fitvids forces override of percent, etc
-	$w = 640;	// a reasonable number
+    $cntr1 = $center ? "<div style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" : "<div style=\"max-width:{$percent}%;\">";
+    $cntr2 = '</div>';
+    $h = 9; $w = 16;
+    if ( $sd ) {
+        $h = 3; $w = 4;
     }
 
-    if ($w != '~!' && $w != 0) {
-	$h = ($w * $vert) + 5;
 	$ret ="\n" . $cntr1 . '<iframe src="' . $url
-     . '" frameborder="0" width="'.$w.'" height="' . $h . '"></iframe>'
+     . '" frameborder="0" width="'.$w.'" height="' . $h . '" frameborder="0" ' . $allowfull . '"></iframe>'
      . $cntr2 . "\n";
-
-    } else {
-	$ret = "\n" . $cntr1 . '<iframe src="' . $url
-     . '" frameborder="0" width="'.$percent.'%" height="0" onload="wvrx_ts_fixVideo(this,'.$vert.');"></iframe>'
-     . $cntr2 . "\n";
-    }
 
     return $ret;
 }
 
-// ===============  [weaver_vimeo id=videoid sd=0 w=0 h=0 color=#hex autoplay=0 loop=0 portrait=1 title=1 byline=1] ======================
+// ===============  [vimeo id=videoid sd=0 w=0 h=0 color=#hex autoplay=0 loop=0 portrait=1 title=1 byline=1] ======================
 function wvrx_ts_sc_vimeo($args = '') {
     $share = '';
     if ( isset ( $args[0] ) )
-	$share = trim($args[0]);
+        $share = trim($args[0]);
 
     extract(shortcode_atts(array(
-	'id' => '',
-	'sd' => false,
-	'color' => '',
-	'autoplay' => false,
-	'loop' => false,
-	'portrait' => true,
-	'title' => true,
-	'byline' => true,
-	'ratio' => false,
-	'percent' => 100,
-	'center' => '1',
-	'w' => '~!'
-    ), $args));
+        'id' => '',
+        'sd' => false,
+        'color' => '',
+        'autoplay' => false,
+        'loop' => false,
+        'portrait' => true,
+        'title' => true,
+        'byline' => true,
+        'percent' => 100,
+        'center' => '1'
+        ), $args));
 
     if (!$share && !$id) return '<strong>No share or id values provided for vimeo shortcode.</strong>';
 
     if ($share)	{	// let the share override any id
-	$share = str_replace('http://vimeo.com/','',$share);
-	if ($share) $id = $share;
+        $share = str_replace('http://vimeo.com/','',$share);
+        if ($share) $id = $share;
     }
 
     $opts = $id . '##';
@@ -423,7 +437,7 @@ function wvrx_ts_sc_vimeo($args = '') {
     $opts = wvrx_ts_add_url_opt($opts, !$title, 'title=0');
     $opts = wvrx_ts_add_url_opt($opts, !$byline, 'byline=0');
 
-    $url = 'http://player.vimeo.com/video/';
+    $url = '//player.vimeo.com/video/';
 
     $opts = str_replace('##+','##?', $opts);
     $opts = str_replace('##','', $opts);
@@ -434,22 +448,17 @@ function wvrx_ts_sc_vimeo($args = '') {
     if (function_exists('weaverii_use_mobile'))
         if (weaverii_use_mobile('mobile')) $percent = 100;
 
-    $vert = $sd ? 0.75 : 0.5625;
-    if ($ratio) $vert = $ratio;
-    $cntr1 = $center ? '<div style="text-align:center">' : '';
-    $cntr2 = $center ? '</div>' : '';
 
-    if ($w != '~!' && $w != 0) {
-        $h = ($w * $vert) + 5;
-	$ret = "\n" . $cntr1 . '<iframe src="' . $url
-     . '" width="'.$w.'" height="'. $h . '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen "></iframe>'
-     . $cntr2 . "\n";
-
-    } else {
-	$ret = "\n" . $cntr1 . '<iframe src="' . $url
-     . '" width="'.$percent.'%" height="0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen onload="wvrx_ts_fixVideo(this,'.$vert.');"></iframe>'
-     . $cntr2 . "\n";
+    $cntr1 = $center ? "<div style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" : "<div style=\"max-width:{$percent}%;\">";
+    $cntr2 = '</div>';
+    $h = 9; $w = 16;
+    if ( $sd ) {
+        $h = 3; $w = 4;
     }
+
+    $ret = "\n" . $cntr1 . '<iframe src="' . $url
+     . '" width="' . $w . '" height="' . $h . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+     . $cntr2 . "\n";
 
     return $ret;
 }
