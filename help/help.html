@@ -280,9 +280,9 @@ h1 {
 <li><a href="#tab_group"><strong>[tab_group] - content in tabs</strong></a></li>
 <li><strong><a href="#headerimage">[header_image] Shortcode</a></strong></li>
 <li><strong><a href="#schtml">[html]</a></strong></li>
-<li><strong><a href="#schtml">[div]text[/div]</a></strong></li>
+<li><strong><a href="#scdiv">[div]text[/div]</a><a href="#schtml"></a></strong></li>
 <li><strong><a href="#sciframe"> [iframe]</a></strong></li>
-<li><strong><a href="#showhidemobile">[hide_if]</a></strong></li>
+<li><strong><a href="#scshowif">[show/hide_if]</a></strong></li>
 <li><strong><a href="#sitetitlesc">[site_title], [site_tagline]</a></strong></li>
 <li><strong><a href="#bloginfo">[bloginfo arg='name' style='your css']</a></strong></li>
 <li><strong><a href="#video">Video - [vimeo], [youtube]</a></strong></li>
@@ -361,20 +361,20 @@ of the WordPress editor.</p>
 </ol>
 </p>
 
-<h3><a name="schtml" id="scdiv"></a><strong>[div]text[/div]</strong></h3>
+<h3><a name="scdiv" id="scdiv"></a><strong>[div]text[/div]</strong>, [span]text[/span]</h3>
 
-<p>The Weaver X Theme Support <code>[div]</code> shortcode allows easily add HTML &lt;div&gt; tags to your post and page content. The
-main purpose of this shortcode is to get around need to switch to the HTML editor view when you need to
-wrap your content in a &lt;div&gt;.</p>
+<p>The Weaver X Theme Support <code>[div]</code> and [span] shortcodes allow you to easily add HTML &lt;div&gt; or &lt;span&gt; tags to your post and page content. The
+main purpose of these shortcodes is to get around need to switch to the HTML editor view when you need to
+wrap your content in a &lt;div&gt; or &lt;span&gt;.</p>
 <p>
-	This will work exactly like a standard HMTL &lt;div&gt; tag. It supports 'id', 'class',
-    and 'style' parameters, which are the most useful. Instead of wrapping your text in &lt;div&gt; tags, wrap them like
+	This will work exactly like a standard HMTL &lt;div&gt;and &lt;span&gt; tags. It supports 'id', 'class',
+    and 'style' parameters, which are the most useful. Instead of wrapping your text in &lt;div&gt; or &lt;span&gt; tags, wrap them like
     this (the Visual view will work just fine):<br />
-    <code>[div style="font-size:20px;']This content will be large.[/div]</code>
-</p>
-
+    <code>[div style="font-size:20px;']This content will be large.[/div]</code><br />
+    <code>[span style=&quot;font-size:20px;']This content will be large.[/span]</code></p>
 <p><strong>Shortcode usage:</strong> <code>[div id='class_id' class='class_name' style='style_values']text[/div]</code>
-<br />
+  <br />
+  <code>[span id='class_id' class='class_name' style='style_values']text[/span]</code>  <br />
 <ol>
     <li><strong>id='class_id' class='class_name' style='style_values'</strong> - Allows you to specify id, class, and style for the &lt;div&gt;. See the example above.
     </li>
@@ -400,7 +400,7 @@ the URL for the external site, and optionally a height. This shortcode automatic
 </ol>
 </p>
 
-<h3><a name="showhidemobile" id="showhidemobile"></a><strong>[show_if]content[/show_if], [hide_if]</strong>content [/hide_if]</h3>
+<h3><a name="scshowif" id="scshowif"></a><strong>[show_if]content[/show_if], [hide_if]</strong>content [/hide_if]</h3>
 <p>The <code>[show_if]</code> and <code>[hide_if]</code> shortcodes allow you to selectively
 display or hide content depending if any of several conditions are met.</p>
 

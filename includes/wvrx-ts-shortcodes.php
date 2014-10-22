@@ -64,6 +64,12 @@ function wvrx_ts_show_hide_if($args = '', $text, $show) {
         'user_can'  => 'default'        // http://codex.wordpress.org/Function_Reference/current_user_can
     ), $args));
 
+    $valid_device = array('default','desktop','mobile','smalltablet','phone','all');
+
+    if ( !in_array( $device, $valid_device )) {
+        return '<br /><strong>Error with [hide/show_if]: <u>' . $device . '</u> not valid for <em>device</em> parameter.</strong><br />';
+
+    }
     if ( $logged_in == 'default' ) {            // **** logged_in
         $logged_in = true;
     } else {
@@ -98,28 +104,33 @@ function wvrx_ts_show_hide_if($args = '', $text, $show) {
         $x = $show;
     }
 
-    $do_show = $logged_in && $not_post_id && $post_id && $user_can;
-    if ( !$show )
-        $do_show = !$do_show;
+    $all_true = $logged_in && $not_post_id && $post_id && $user_can;    // all true except device
 
-    if ( $do_show ) {
-        if ( $device == 'default' ) {
+    if ( !$all_true ) {                         // device irrelevant
+        // $text .= '* ALL TRUE FAILED *';
+        if ( !$show )
+            return do_shortcode( $text );       // hide fails, so show it
+        else
+            return '';                          // show fails, so hide it
+
+    } elseif ( $device == 'default') {          // so all other conditions passed, see if specified device
+        // $text .= '* ALL TRUE, DEVICE DEFAULT *';
+        if ( $show )
             return do_shortcode( $text );
-        } else {
-            $GLOBALS['wvrx_sc_show_hide'] = strtolower('show-' . $device);  // for [extra_menu]
-            $ret = '<div class="atw-' . $GLOBALS['wvrx_sc_show_hide'] . '">' . do_shortcode($text) . '</div>';
-            unset( $GLOBALS['wvrx_sc_show_hide'] );
-            return $ret;
-        }
-    }
-    if ( $device == 'default' ) {       // still have to do the show/hide device option
+        else
             return '';
     } else {
-        $GLOBALS['wvrx_sc_show_hide'] = strtolower('hide-' . $device);
-        $ret =  '<div class="atw-' . $GLOBALS['wvrx_sc_show_hide'] . '">' . do_shortcode($text) . '</div>';
+        // $text .= '* ALL TRUE, DEPENDS ON DEVICE *';
+        if ( $show ) {
+            $GLOBALS['wvrx_sc_show_hide'] = strtolower('show-' . $device);  // for [extra_menu]
+        } else {
+            $GLOBALS['wvrx_sc_show_hide'] = strtolower('hide-' . $device);
+        }
+        $ret = '<div class="wvr-' . $GLOBALS['wvrx_sc_show_hide'] . '">' . do_shortcode($text) . '</div>';
         unset( $GLOBALS['wvrx_sc_show_hide'] );
         return $ret;
     }
+    return '';
 }
 
 
@@ -222,26 +233,26 @@ function wvrx_ts_sc_tab_group( $args, $content ) {
     else
         ++$GLOBALS['wvrx_ts_tab_id'];
 
-    $group_id = 'atw-tab-group-' . $GLOBALS['wvrx_ts_tab_id'];
+    $group_id = 'wvr-tab-group-' . $GLOBALS['wvrx_ts_tab_id'];
 
     $css = '';	// default styles
     $add_style = '';
     if ($border_color != '')
-        $css .= '#' . $group_id . '.atw-tabs-style .atw-tabs-pane,#' .
-            $group_id . '.atw-tabs-style .atw-tabs-nav span {border-color:' . $border_color . ";}\n";
+        $css .= '#' . $group_id . '.wvr-tabs-style .wvr-tabs-pane,#' .
+            $group_id . '.wvr-tabs-style .wvr-tabs-nav span {border-color:' . $border_color . ";}\n";
 
     if ($pane_min_height != '')
-        $css .= '#' . $group_id . '.atw-tabs-style .atw-tabs-pane {min-height:' . $pane_min_height . ";}\n";
+        $css .= '#' . $group_id . '.wvr-tabs-style .wvr-tabs-pane {min-height:' . $pane_min_height . ";}\n";
 
     if ($pane_bg != '')
-        $css .= '#' . $group_id . '.atw-tabs-style .atw-tabs-pane {background-color:' . $pane_bg . ";}\n";
+        $css .= '#' . $group_id . '.wvr-tabs-style .wvr-tabs-pane {background-color:' . $pane_bg . ";}\n";
 
     if ($tab_bg != '')
-        $css .= '#' . $group_id . '.atw-tabs-style .atw-tabs-nav span {background-color:' . $tab_bg . ";}\n";
+        $css .= '#' . $group_id . '.wvr-tabs-style .wvr-tabs-nav span {background-color:' . $tab_bg . ";}\n";
 
     if ($tab_selected_color != '')
-        $css .= '#' . $group_id . '.atw-tabs-style .atw-tabs-nav span.atw-tabs-current,#' .
-            $group_id . '.atw-tabs-style .atw-tabs-nav span:hover {background-color:' . $tab_selected_color . ";}\n";
+        $css .= '#' . $group_id . '.wvr-tabs-style .wvr-tabs-nav span.wvr-tabs-current,#' .
+            $group_id . '.wvr-tabs-style .wvr-tabs-nav span:hover {background-color:' . $tab_selected_color . ";}\n";
 
     if ($css != '') {	// specified some style...
         $add_style = "<style type=\"text/css\">\n" . $css . "</style>\n";
@@ -257,14 +268,14 @@ function wvrx_ts_sc_tab_group( $args, $content ) {
     if ( isset( $GLOBALS['wvrx_ts_tabs'] ) && is_array( $GLOBALS['wvrx_ts_tabs'] ) ) {
         foreach ( $GLOBALS['wvrx_ts_tabs'] as $tab ) {
             $tabs[] = '<span>' . $tab['title'] . '</span>'. "\n";
-            $panes[] = "\n" .'<div class="atw-tabs-pane">' . $tab['content'] . '</div>';
+            $panes[] = "\n" .'<div class="wvr-tabs-pane">' . $tab['content'] . '</div>';
         }
-        $out = '<div id="' . $group_id . '" class="atw-tabs atw-tabs-style"> <!-- tab_group -->' . "\n"
-            . '<div class="atw-tabs-nav">' . "\n"
+        $out = '<div id="' . $group_id . '" class="wvr-tabs wvr-tabs-style"> <!-- tab_group -->' . "\n"
+            . '<div class="wvr-tabs-nav">' . "\n"
             . implode( '', $tabs ) . '</div>' . "\n"
-            . '<div class="atw-tabs-panes">'
+            . '<div class="wvr-tabs-panes">'
             . implode( '', $panes ) . "\n"
-            . '</div><div class="atw-tabs-clear"></div>' . "\n"
+            . '</div><div class="wvr-tabs-clear"></div>' . "\n"
             . '</div> <!-- end tab_group -->' . "\n";
     }
 

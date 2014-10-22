@@ -5,7 +5,7 @@ Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.5
+Version: 0.6
 
 License: GPL
 
@@ -31,21 +31,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* CORE FUNCTIONS
 */
 
-define ('WVRX_TS_VERSION','0.5');
+define ('WVRX_TS_VERSION','0.6');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
+define ('WVRX_TS_APPEARANCE_PAGE', false );
 
 function wvrx_ts_installed() {
     return true;
 }
 
-function wvrx_ts_admin() {
+if ( WVRX_TS_APPEARANCE_PAGE ){
+
+    function wvrx_ts_admin() {
     require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-top.php'); // NOW - load the admin stuff
     wvrx_ts_admin_page();
 }
 
 function wvrx_ts_admin_menu() {
     $page = add_theme_page(
-	  'Weaver X Theme Support by WeaverTheme.com','<small>&times;Theme Support</small>','manage_options','wvrx_ts', 'wvrx_ts_admin');
+	  'Weaver Xtreme Theme Support by WeaverTheme.com','<small>&times;Theme Support</small>','manage_options','wvrx_ts', 'wvrx_ts_admin');
 	/* using registered $page handle to hook stylesheet loading for this admin page */
     add_action('admin_print_styles-'.$page, 'wvrx_ts_admin_scripts');
 }
@@ -60,6 +63,7 @@ function wvrx_ts_admin_scripts() {
     wp_enqueue_script ("thickbox");
 
     wp_enqueue_script('wvrx_ts_Yetii', wvrx_ts_plugins_url('/js/yetii/yetii',WVRX_TS_MINIFY.'.js'), array(),WVRX_TS_VERSION);
+}
 }
 
 function wvrx_ts_plugins_url($file,$ext) {
