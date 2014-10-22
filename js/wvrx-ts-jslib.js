@@ -16,12 +16,12 @@
 
 jQuery(document).ready(function($) {		// self-defining function
     // Tabs
-	$('.atw-tabs-nav').delegate('span:not(.atw-tabs-current)', 'click', function() {
-		$(this).addClass('atw-tabs-current').siblings().removeClass('atw-tabs-current')
-		.parents('.atw-tabs').find('.atw-tabs-pane').hide().eq($(this).index()).show();
+	$('.wvr-tabs-nav').delegate('span:not(.wvr-tabs-current)', 'click', function() {
+		$(this).addClass('wvr-tabs-current').siblings().removeClass('wvr-tabs-current')
+		.parents('.wvr-tabs').find('.wvr-tabs-pane').hide().eq($(this).index()).show();
 	});
-	$('.atw-tabs-pane').hide();
-	$('.atw-tabs-nav span:first-child').addClass('atw-tabs-current');
-	$('.atw-tabs-panes .atw-tabs-pane:first-child').show();
+	$('.wvr-tabs-pane').hide();
+	$('.wvr-tabs-nav span:first-child').addClass('wvr-tabs-current');
+	$('.wvr-tabs-panes .wvr-tabs-pane:first-child').show();
 
 });

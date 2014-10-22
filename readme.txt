@@ -11,7 +11,7 @@ Requires at least: 3.9
 Tested up to: 4.0
 Stable tag: 1.0
 
-A useful shortcode and widget collection for Weaver X
+A useful shortcode and widget collection for Weaver Xtreme
 
 == Description ==
 
@@ -20,7 +20,7 @@ This is the main theme suppot for the Weaver X Theme. This plugin provides a col
 While these shortcodes are optimized for the Weaver X theme, they will also work with full functionality for most WordPress themes, and can be used
 if you switch themes.
 
-Includes complete documentation help file.
+Includes complete documentation help file. Instructions for using the shortcodes and widgets are in the help file. Use it for non-Weaver Xtreme themes.
 
 = Shortcodes included =
 
@@ -29,8 +29,7 @@ Includes complete documentation help file.
 * **[vimeo]** -  Show your Vimeo videos responsively, and with the capability to use any of the Vimeo custom display options.
 * **[iframe]** - Quick and easy display of content in an iframe.
 * **[div]**, **[span]**, **[html]** - Add div, span, and other html to pages/posts without the need to switch to Text view.
-* **[hide_mobile]** - Show or hide content on mobile devices.
-* **[hide/show_if_logged_in]** - Hide or show content based on user being logged in or not.
+* **[hide/show_if]** - Show or hide content depending upon options: device, page ID, user capability, logged in status.
 * **[bloginfo]** - Display any information available from WordPress bloginfo function.
 * **[user_can]** - Display content base on logged in user role.
 * **[site_title]** - Display Site title.
@@ -77,6 +76,10 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == Changelog ==
+= 0.6 =
+* Fixed [ show/hide_if ] for multiple conditions that include device
+* Changed interface to Weaver Xtreme - all codes now just in Weaver X Add-ons tab
+
 = 0.5 =
 * Added [ show/hide_if ], removed [ hide_mobie ], [show_if_logged_in]
 * Updated Doc
