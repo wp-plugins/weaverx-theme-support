@@ -53,8 +53,6 @@ below listed scripts and libraries. Those images are covered by their respective
 This plugin also includes several scripts and libraries that are covered under the terms
 of their own licenses in the listed files in the plugin distribution:
 
-* Yetii - Yet (E)Another Tab Interface Implementation - license in /js/yetii/yetii.js (BSD)
-* plugin scripts - original to this plugin and the Weaver X theme, covered by GPL
 
 
 == Installation ==
@@ -76,6 +74,10 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == Changelog ==
+= 0.7 =
+* Fixes for [ show/hide_if]
+* Removed unused files
+
 = 0.6 =
 * Fixed [ show/hide_if ] for multiple conditions that include device
 * Changed interface to Weaver Xtreme - all codes now just in Weaver X Add-ons tab
