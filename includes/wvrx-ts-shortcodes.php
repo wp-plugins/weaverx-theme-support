@@ -81,7 +81,7 @@ function wvrx_ts_show_hide_if($args = '', $text, $show) {
         $not_post_id = true;
     } else {
         $list = explode(',', str_replace(' ', '', $not_post_id));
-        $not_post_id = in_array( get_the_ID(), $list );
+        $not_post_id = !in_array( get_the_ID(), $list );
     }
 
     if ( $post_id == 'default') {                 // **** pages
