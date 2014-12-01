@@ -7,33 +7,22 @@ function wvrx_ts_setup_shortcodes() {
     // we setup all of our shortcodes only after the theme has been loaded...
 
     $codes = array(						    // list of shortcodes
+    array('bloginfo' => 'wvrx_ts_sc_bloginfo'),      // [bloginfo]
+    array('box' => 'wvrx_ts_sc_box'),       // [box]
 	array('div' => 'wvrx_ts_sc_div'),       // [div]
-	array('html' => 'wvrx_ts_sc_html'),		// [html]
-	array('span' => 'wvrx_ts_sc_span'),	    // [span]
-
+    array('header_image' => 'wvrx_ts_sc_header_image'),      // [header_image]
     array('hide_if' => 'wvrx_ts_sc_hide_if' ),	      		// [hide_if]
-
+    array('html' => 'wvrx_ts_sc_html'),		// [html]
+    array('iframe' => 'wvrx_ts_sc_iframe'),         // [iframe]
     array('show_if' => 'wvrx_ts_sc_show_if' ),	      		// [show_if]
-
-	array('bloginfo' => 'wvrx_ts_sc_bloginfo'),      // [bloginfo]
-
-	array('header_image' => 'wvrx_ts_sc_header_image'),      // [header_image]
-
-	array('iframe' => 'wvrx_ts_sc_iframe'),         // [iframe]
-
+	array('span' => 'wvrx_ts_sc_span'),	    // [span]
 	array('site_tagline' => 'wvrx_ts_sc_site_tagline'),   // [site_tagline]
-
 	array('site_title' => 'wvrx_ts_sc_site_title'), // [site_title]
-
 	array('tab_group' => 'wvrx_ts_sc_tab_group',
           'tab' => 'wvrx_ts_sc_tab'),               // [tab_group], [tab]
-
 	array('vimeo' => 'wvrx_ts_sc_vimeo'),           // [vimeo]
-
 	array('youtube' => 'wvrx_ts_sc_youtube'),       // [youtube]
-
-	array('weeaverx_info' => 'wvrx_ts_weaverx_sc_info'),     // [weaverx_info]
-
+	array('weaverx_info' => 'wvrx_ts_weaverx_sc_info'),     // [weaverx_info]
     );
 
    foreach ($codes as $code) {
@@ -42,6 +31,65 @@ function wvrx_ts_setup_shortcodes() {
 }
 
 add_action('init', 'wvrx_ts_setup_shortcodes');  // allow shortcodes to load after theme has loaded so we know which version to use
+
+// ===============  [box] ===================
+function wvrx_ts_sc_box( $args = '', $text ) {
+    extract(shortcode_atts(array(
+        'align'         =>  '',
+        'border'        =>  true,
+        'border_rule'   => '1px solid black',
+        'border_radius' => '',
+        'color'         => '',
+        'background'    => '',
+        'margin'        => '',
+        'padding'       => '1',
+        'shadow'        => '',
+        'style'         => '',
+        'width'         => ''
+    ), $args));
+
+    $sty = 'style="';
+
+    if ( $align ) {
+        $align = strtolower($align);
+        switch ( $align ) {
+            case 'center':
+                $sty .= 'display:block;margin-left:auto;margin-right:auto;';
+                break;
+            case 'right':
+                $sty .= 'float:right;';
+                break;
+            default:
+                $sty .= 'float:left;';
+                break;
+        }
+    }
+
+    if ( $border )
+        $sty .= "border:{$border_rule};";
+    if ( $border_radius )
+        $sty .= "border-radius:{$border_radius}px;";
+    if ( $shadow ) {
+        if ( $shadow < 1 ) $shadow = 1;
+        if ( $shadow > 5 ) $shadow = 5;
+        $sty .= "box-shadow:0 0 4px {$shadow}px rgba(0,0,0,0.25);";
+    }
+    if ( $color )
+        $sty .= "color:{$color};";
+    if ( $background )
+        $sty .= "background-color:{$background};";
+    if ( $margin )
+        $sty .= "margin:{$margin}em;";
+    if ( $padding )
+        $sty .= "padding:{$padding}em;";
+    if ( $width )
+        $sty .= "width:{$width}%;";
+    if ( $sty )
+        $sty .= $style;
+    $sty .= '"';    // finish it
+
+    return "<div {$sty}><!--[box]-->" . do_shortcode( $text ) . '</div><!--[box]-->';
+}
 
 // ===============  [hide_if] ===================
 function wvrx_ts_sc_hide_if($args = '', $text ) {
@@ -188,9 +236,9 @@ function wvrx_ts_sc_site_tagline($args = '') {
     $title = get_bloginfo( 'description' );
 
     if ($style) {
-	return '<span style="' . $style . '">' . $title . '</span>';
+        return '<span style="' . $style . '">' . $title . '</span>';
     }
-    return $title;
+        return $title;
 }
 
 // ===============  [iframe src='address' height=nnn] ======================
@@ -399,7 +447,8 @@ function wvrx_ts_sc_youtube($args = '') {
 
     $allowfull = $fullscreen ? ' allowfullscreen="allowfullscreen"' : '';
 
-    $cntr1 = $center ? "<div style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" : "<div style=\"max-width:{$percent}%;\">";
+    $cntr1 = $center ? "<div class=\"wvrx-video wvrx-youtube\" style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" :
+                       "<div class=\"wvrx-video wvrx-youtube\" style=\"max-width:{$percent}%;\">";
     $cntr2 = '</div>';
     $h = 9; $w = 16;
     if ( $sd ) {
@@ -460,7 +509,8 @@ function wvrx_ts_sc_vimeo($args = '') {
         if (weaverii_use_mobile('mobile')) $percent = 100;
 
 
-    $cntr1 = $center ? "<div style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" : "<div style=\"max-width:{$percent}%;\">";
+    $cntr1 = $center ? "<div class=\"wvrx-video wvrx-vimeo\" style=\"margin-left:auto;margin-right:auto;max-width:{$percent}%;\">" :
+                       "<div class=\"wvrx-video wvrx-vimeo\" style=\"max-width:{$percent}%;\">";
     $cntr2 = '</div>';
     $h = 9; $w = 16;
     if ( $sd ) {

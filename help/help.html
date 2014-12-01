@@ -277,14 +277,16 @@ h1 {
 <li><strong><a href="#admin_page">Weaver X Theme Extras Admin Page</a> </strong></li>
 <li><a href="#sc_summary"><strong>Shortcode Summary</strong></a></li>
 <ul>
+<li><strong><a href="#bloginfo">[bloginfo arg='name' style='your css']</a></strong></li>
+<li><strong><a href="#box">[box]text[/box]</a></strong></li>
 <li><a href="#tab_group"><strong>[tab_group] - content in tabs</strong></a></li>
 <li><strong><a href="#headerimage">[header_image] Shortcode</a></strong></li>
 <li><strong><a href="#schtml">[html]</a></strong></li>
-<li><strong><a href="#scdiv">[div]text[/div]</a><a href="#schtml"></a></strong></li>
+<li><strong><a href="#scdiv">[div]text[/div]</a>, <a href="#schtml">[span]text[/span]</a></strong></li>
 <li><strong><a href="#sciframe"> [iframe]</a></strong></li>
 <li><strong><a href="#scshowif">[show/hide_if]</a></strong></li>
 <li><strong><a href="#sitetitlesc">[site_title], [site_tagline]</a></strong></li>
-<li><strong><a href="#bloginfo">[bloginfo arg='name' style='your css']</a></strong></li>
+
 <li><strong><a href="#video">Video - [vimeo], [youtube]</a></strong></li>
 </ul>
 <li><a href="#widg-sum"><strong>Widget Summary</strong></a>
@@ -483,6 +485,24 @@ strings depending on the value. All the supported values are listed at http://co
 Some useful values include 'stylesheet_directory' and 'template_directory'. You can wrap the bloginfo output with css added to a &lt;span style=&quot;your css&quot;&gt;.
 </p>
 
+<h3><a name="box" id="box"></a><strong>[box]text[/box]</strong></h3>
+
+<p>
+Wrap content in a box.</p>
+<p><strong>Shortcode  Usage:</strong> <code>[box background=#fff border=true border_rule='border-css' border_radius=4 color=#000 margin=1 padding=1 shadow=1 style='style-rules']text[/box]</code></p>
+<ol>
+  <li><strong>align=align</strong>: Leave blank, or specify left, center, or right for alignment of box within surrounding text.</li>
+  <li><strong>border=true</strong>: True is default. Specify false or 0 for no borders.</li>
+  <li><strong>border_rule='1px solid black</strong>': Specify a compound border CSS value to replace the default '1px solid black'.</li>
+  <li><strong>border_radius=4</strong>: Default is none - specify a px value for the corner radius if you want rounded corners.</li>
+  <li><strong>color=#000</strong>: Default is inherit - specify a valid color for the color of the text in the box.</li>
+  <li><strong>background=#fff</strong>: Default is inherit - specify color for box background color.</li>
+  <li><strong>margin=1</strong>: Default is 0 - specify an 'em' value for margin around the box. Using a margin overrides align parameter.</li>
+  <li><strong>padding=1</strong>: Default 1 - specify an 'em' value for padding inside box.</li>
+  <li><strong>shadow=0</strong>: Default 0 - specify a value from 1 to 5 for a border around the box.</li>
+  <li><strong>style=inline-style</strong>: any additional custom styling for the box</li>
+  <li><strong>width=100</strong>: A percentage width for the box within its surrounding container.</li>
+</ol>
 <h3><a name="video" id="video"></a><strong>Video - [vimeo], [youtube]</strong></h3>
 <p>Weaver X Theme Support supports specialized shortcodes to display video. While there are other ways to embed video, the Weaver X Theme Support versions have two important features. First, they will auto adjust to the width of your content, <em><strong>including</strong></em> the mobile view. Second, they use the latest iframe/HTML5 interface provided by YouTube and Vimeo.</p>
 <p><strong>Specifying Video Display Size for both shortcodes</strong></p>
