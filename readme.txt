@@ -74,6 +74,9 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == Changelog ==
+= 0.8 =
+* Added [ box ]
+
 = 0.7 =
 * Fixes for [ show/hide_if]
 * Removed unused files

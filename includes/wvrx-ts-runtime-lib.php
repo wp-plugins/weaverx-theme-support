@@ -14,45 +14,7 @@ function wvrx_ts_help_link($ref, $label) {
 
 // ===============================  options =============================
 
-function wvrx_ts_getopt($opt) {
-    global $wvrx_ts_opts_cache;
-    if (!$wvrx_ts_opts_cache)
-        $wvrx_ts_opts_cache = get_option('wvrx_ts_settings' ,array());
 
-    if (!isset($wvrx_ts_opts_cache[$opt]))	// handles changes to data structure
-      {
-	return false;
-      }
-    return $wvrx_ts_opts_cache[$opt];
-}
-
-function wvrx_ts_setopt($opt, $val, $save = true) {
-    global $wvrx_ts_opts_cache;
-    if (!$wvrx_ts_opts_cache)
-        $wvrx_ts_opts_cache = get_option('wvrx_ts_settings' ,array());
-
-    $wvrx_ts_opts_cache[$opt] = $val;
-    if ($save)
-	wvrx_ts_wpupdate_option('wvrx_ts_settings',$wvrx_ts_opts_cache);
-}
-
-function wvrx_ts_save_all_options() {
-    global $wvrx_ts_opts_cache;
-    wvrx_ts_wpupdate_option('wvrx_ts_settings',$wvrx_ts_opts_cache);
-}
-
-function wvrx_ts_delete_all_options() {
-    global $wvrx_ts_opts_cache;
-    $wvrx_ts_opts_cache = false;
-    if (current_user_can( 'manage_options' ))
-	delete_option( 'wvrx_ts_settings' );
-}
-
-function wvrx_ts_wpupdate_option($name,$opts) {
-    if (current_user_can( 'manage_options' )) {
-	update_option($name, $opts);
-    }
-}
 
 // Interface to Weaver Xtreme
 
@@ -65,15 +27,18 @@ function wvrx_ts_theme_support_addon() {
 Click the<span style="color:red; vertical-align: middle; margin-left:.25em;" class="dashicons dashicons-editor-help"></span> button to open help entry.</p>
     <h3>Shortcodes</h3>
     <ul>
-
-    <li><span class="wvr-blue">Show If- [show_if]</span> - Show content only if args meet specified conditions
-        <?php wvrx_ts_help_link('help.html#scshowif','Help for Show/Hide If');?><br />
-        <code>[show|hide_if device=device logged_in=true/false not_post_id=id-list post_id=id-list user_can=what]text[/show|hide_if]</code>
+    <li><span class="wvr-blue">Blog Info - [bloginfo]</span> - Display blog info as provided by WordPress bloginfo function
+        <?php wvrx_ts_help_link('help.html#bloginfo','Help for Blog Info');?><br />
+        <code>[bloginfo name='WP bloginfo name' style='style-rules']</code>
     </li>
-
-    <li><span class="wvr-blue">Hide If - [hide_if]</span> - Hide content
+    <li><span class="wvr-blue">Box - [box]</span> - Display content in a Box
+        <?php wvrx_ts_help_link('help.html#box','Help for Box');?><br />
+        <code>[box background=#fff border=true border_rule='border-css' border_radius=4 color=#000 margin=1 padding=1 shadow=1 style='style-rules' width=100]text[/box]</code>
     </li>
-
+    <li><span class="wvr-blue">DIV - [div]text[/div]</span> - Wrap content in a &lt;div&gt; tag
+        <?php wvrx_ts_help_link('help.html#scdiv','Help for Header Div');?><br />
+        <code>[div id='class_id' class='class_name' style='style_values']text[/div]</code>
+    </li>
     <li><span class="wvr-blue">Header Image - [header_image]</span> - Display default header image
         <?php wvrx_ts_help_link('help.html#headerimage','Help for Header Image');?><br />
         <code>[header_image h='size' w='size' style='inline-style']</code>
@@ -83,42 +48,34 @@ Click the<span style="color:red; vertical-align: middle; margin-left:.25em;" cla
         <?php wvrx_ts_help_link('help.html#schtml','Help for HTML');?><br />
         <code>[html html-tag args='parameters']</code>
     </li>
-
-    <li><span class="wvr-blue">DIV - [div]text[/div]</span> - Wrap content in a &lt;div&gt; tag
-        <?php wvrx_ts_help_link('help.html#scdiv','Help for Header Div');?><br />
-        <code>[div id='class_id' class='class_name' style='style_values']text[/div]</code>
-    </li>
-
-    <li><span class="wvr-blue">SPAN - [span]text[/span]</span> - Wrap content in a &lt;span&gt; tag
-        <?php wvrx_ts_help_link('help.html#scdiv','Help for Span');?><br />
-        <code>[span id='class_id' class='class_name' style='style_values']text[/span]</code>
-    </li>
-
-    <li><span class="wvr-blue">Tab Group - [tab_group]</span> - Display content on separate tabs
-        <?php wvrx_ts_help_link('help.html#tab_group','Help for Tab Group');?><br />
-        <code>[tab_group][tab]...[/tab][tab]...[/tab][/tab_group]</code>
-    </li>
-
     <li><span class="wvr-blue">iFrame - [iframe]</span> - Display external content in an iframe
         <?php wvrx_ts_help_link('help.html#sciframe','Help for iframe');?><br />
         <code>[iframe src='http://example.com' height=600 percent=100 style="style"]</code>
     </li>
 
-    <li><span class="wvr-blue">Site Title - [site_title]</span> - Display the site title
-        <?php wvrx_ts_help_link('help.html#sitetitlesc','Help for Site Title');?><br />
-        <code>[site_title style='inline-style']</code>
+    <li><span class="wvr-blue">Show If- [show_if]</span> - Show content only if args meet specified conditions
+        <?php wvrx_ts_help_link('help.html#scshowif','Help for Show/Hide If');?><br />
+        <code>[show|hide_if device=device logged_in=true/false not_post_id=id-list post_id=id-list user_can=what]text[/show|hide_if]</code>
+    </li>
+    <li><span class="wvr-blue">Hide If - [hide_if]</span> - Hide content
     </li>
 
     <li><span class="wvr-blue">Site Tagline - [site_tagline]</span> - Display the site tagline
         <?php wvrx_ts_help_link('help.html#sitetitlesc','Help for Site Tagline');?><br />
         <code>[site_tagline style='inline-style']</code>
     </li>
-
-    <li><span class="wvr-blue">Blog Info - [bloginfo]</span> - Display blog info as provided by WordPress bloginfo function
-        <?php wvrx_ts_help_link('help.html#bloginfo','Help for Blog Info');?><br />
-        <code>[bloginfo name='WP bloginfo name' style='style-rules']</code>
+    <li><span class="wvr-blue">Site Title - [site_title]</span> - Display the site title
+        <?php wvrx_ts_help_link('help.html#sitetitlesc','Help for Site Title');?><br />
+        <code>[site_title style='inline-style']</code>
     </li>
-
+    <li><span class="wvr-blue">SPAN - [span]text[/span]</span> - Wrap content in a &lt;span&gt; tag
+        <?php wvrx_ts_help_link('help.html#scdiv','Help for Span');?><br />
+        <code>[span id='class_id' class='class_name' style='style_values']text[/span]</code>
+    </li>
+    <li><span class="wvr-blue">Tab Group - [tab_group]</span> - Display content on separate tabs
+        <?php wvrx_ts_help_link('help.html#tab_group','Help for Tab Group');?><br />
+        <code>[tab_group][tab]...[/tab][tab]...[/tab][/tab_group]</code>
+    </li>
     <li><span class="wvr-blue">Vimeo - [vimeo]</span> - Display video from Vimeo responsively, with options
         <?php wvrx_ts_help_link('help.html#video','Help for Video');?><br />
         <code>[vimeo vimeo-url id=videoid sd=0 percent=100 center=1 color=#hex autoplay=0 loop=0 portrait=1 title=1 byline=1]</code>
