@@ -74,6 +74,9 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == Changelog ==
+== 0.9 ==
+* Added Per Page and Per Post admin support to plugin (removed from Xtreme theme)
+
 = 0.8 =
 * Added [ box ]
 
