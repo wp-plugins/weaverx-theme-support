@@ -5,9 +5,8 @@ Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.8
-
-License: GPL
+Version: 0.9
+License: GPL V3
 
 Weaver X Theme Support
 
@@ -31,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* CORE FUNCTIONS
 */
 
-define ('WVRX_TS_VERSION','0.8');
+define ('WVRX_TS_VERSION','0.9');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 define ('WVRX_TS_APPEARANCE_PAGE', false );
 
@@ -70,11 +69,15 @@ require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-widgets.php'); 		// widget
 
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-shortcodes.php'); // load the shortcode definitions
 
+//if (current_user_can('edit_posts')) { // allows only admin to see, also avoids loading at runtime (current_user_can not available for plugins)
+require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
+//}
+
 // ======================================== subthemes ========================================
-    add_action('weaverx_child_show_extrathemes','wvrx_ts_child_show_extrathemes_action');
+add_action('weaverx_child_show_extrathemes','wvrx_ts_child_show_extrathemes_action');
 
 function wvrx_ts_child_show_extrathemes_action() {
-    echo '<h3 class="atw-option-subheader">Select an Add-on Subtheme You Have Uploaded</h3>';
+    echo '<h3 class="atw-option-subheader">' . __('Select an Add-on Subtheme You Have Uploaded','weaver-xtreme' /*adm*/) . '</h3>';
     $addon_dir = weaverx_f_uploads_base_dir() . 'weaverx-subthemes/addon-subthemes/';
     $addon_url = weaverx_f_uploads_base_url() . 'weaverx-subthemes/addon-subthemes/';
 
@@ -95,11 +98,11 @@ function wvrx_ts_child_show_extrathemes_action() {
 
         $cur_addon = weaverx_getopt('wvrx_addon_name');
         if ($cur_addon)
-            echo '<h3>Currently selected Add-on Subtheme: ' . ucwords(str_replace('-',' ',$cur_addon)) . '</h3>';
+            echo '<h3>' . __('Currently selected Add-on Subtheme: ','weaver-xtreme' /*adm*/) . ucwords(str_replace('-',' ',$cur_addon)) . '</h3>';
 ?>
     <form enctype="multipart/form-data" name='pick_added_theme' action="<?php echo $_SERVER["REQUEST_URI"]; ?>" method='post'>
 
-     <h4>Select an add-on subtheme: </h4>
+     <h4><?php _e('Select an add-on subtheme:','weaver-xtreme' /*adm*/); ?></h4>
 
 <?php
         foreach ($addon_list as $addon) {
@@ -113,30 +116,31 @@ function wvrx_ts_child_show_extrathemes_action() {
         }
 ?>
         <div style="clear:both;"></div>
-        <br /><span class='submit'><input name="set_added_subtheme" type="submit" value="Set to Selected Add-on Subtheme" /></span>
-        <small style="color:#b00;"><br /><strong>Note:</strong> Selecting a new subtheme will change only theme related settings.
+        <br /><span class='submit'><input name="set_added_subtheme" type="submit" value="<?php _e('Set to Selected Add-on Subtheme','weaver-xtreme' /*adm*/); ?>" /></span>
+        <small style="color:#b00;"><br /><?php _e('<strong>Note:</strong> Selecting a new subtheme will change only theme related settings.
     Options labelled with (&diams;) will be retained.
-	You can use the Save/Restore tab to save a copy of all your current settings first.</small>
+	You can use the Save/Restore tab to save a copy of all your current settings first.','weaver-xtreme' /*adm*/); ?></small>
 
         <?php weaverx_nonce_field('set_added_subtheme'); ?>
 
-        <br /><br /><span class='atw-small-submit' style="margin-left:100px;"><input name="delete_added_subtheme" type="submit" value="Delete Selected Add-on Subtheme" /></span> &nbsp;<small>This will delete the selected Add-on Subtheme from the Add-on directory</small>
+        <br /><br /><span class='atw-small-submit' style="margin-left:100px;"><input name="delete_added_subtheme" type="submit" value="<?php _e('Delete Selected Add-on Subtheme','weaver-xtreme' /*adm*/); ?>" /></span> &nbsp;
+		<small><?php _e('This will delete the selected Add-on Subtheme from the Add-on directory','weaver-xtreme' /*adm*/); ?></small>
         <?php weaverx_nonce_field('delete_added_subtheme'); ?>
         </form>
 <?php
     } else {
 ?>
-	<p>No Add-on Subthemes available.</p>
+	<p><?php _e('No Add-on Subthemes available.','weaver-xtreme' /*adm*/); ?></p>
 <?php
     }
     echo '<h3 class="atw-option-subheader">Upload an Add-on Subtheme From Your Computer</h3>';
 ?>
-    <p>You can find additional free and premium Add-on Subthemes for <em>Weaver Xtreme</em>
-    <a href="http://xtreme.weavertheme.com/add-on-subthemes/" title="Weaver Xtreme Add-on Subthemes"><strong>HERE</strong></a>.</p>
+    <p><?php _e('You can find additional free and premium Add-on Subthemes for <em>Weaver Xtreme</em>','weaver-xtreme' /*adm*/); ?>
+    <a href="http://xtreme.weavertheme.com/add-on-subthemes/" title="<?php _e('Weaver Xtreme Add-on Subthemes','weaver-xtreme' /*adm*/); ?>"><strong><?php _e('HERE','weaver-xtreme' /*adm*/); ?></strong></a>.</p>
 <form name='form_added_theme' enctype="multipart/form-data" action="<?php echo $_SERVER["REQUEST_URI"]; ?>" method="POST">
     <table>
 	<tr valign="top">
-	    <td><strong>Select Add-on Subtheme .zip file to upload:</strong>
+	    <td><strong><?php _e('Select Add-on Subtheme .zip file to upload:','weaver-xtreme' /*adm*/); ?></strong>
 		<input name="uploaded_addon" type="file" />
 		<input type="hidden" name="uploadaddon" value="yes" />
             </td>
@@ -144,7 +148,7 @@ function wvrx_ts_child_show_extrathemes_action() {
         <tr><td>
 	    <span style="margin-left:50px;" class='submit'>
 		<input name="upload_addon" type="submit" value="Upload Add-on Subtheme" /><br />
-	    </span>&nbsp;<small><strong>Upload and Save</strong> an Add-on Subtheme or Subtheme collection from .zip file on your computer. Will be saved on your site's filesystem.</small>
+	    </span>&nbsp;<small><?php _e('<strong>Upload and Save</strong> an Add-on Subtheme or Subtheme collection from .zip file on your computer. Will be saved on your site\'s filesystem.','weaver-xtreme' /*adm*/); ?></small>
 	</td></tr>
     </table>
     <?php weaverx_nonce_field('upload_addon'); ?>
@@ -165,12 +169,12 @@ function wvrx_ts_child_process_options() {
             $contents = file_get_contents($openname);
 
                 if (!weaverx_ex_set_current_to_serialized_values($contents,'weaverx_uploadit:'.$openname)) {
-                    echo '<div id="message" class="updated fade"><p><strong><em style="color:red;">Sorry,
-            there was a problem uploading your add on theme. The name you picked did not have a valid
-            Weaver Xtreme theme file in the /weaverx-subthemes/addon-subthemes directory.</em></strong></p></div>';
+                    echo '<div id="message" class="updated fade"><p><strong><em style="color:red;">' .
+__('Sorry, there was a problem uploading your add on theme. The name you picked did not have a valid
+Weaver Xtreme theme file in the /weaverx-subthemes/addon-subthemes directory.','weaver-xtreme' /*adm*/)  . '</em></strong></p></div>';
             } else {
-                weaverx_save_msg('Weaver Xtreme theme reset to ' .
-                 ucwords(str_replace('-',' ',$name )) . ' add-on subtheme.');
+                weaverx_save_msg(__('Weaver Xtreme theme reset to ','weaver-xtreme' /*adm*/) .
+                ucwords(str_replace('-',' ',$name )) . ' add-on subtheme.');
                 weaverx_setopt('wvrx_addon_name',$name);
             }
         }
@@ -182,8 +186,8 @@ function wvrx_ts_child_process_options() {
             $name = $_POST['wvrx_addon_name'];
             @unlink(weaverx_f_uploads_base_dir() . 'weaverx-subthemes/addon-subthemes/' . $name . '.wxt');
             @unlink(weaverx_f_uploads_base_dir() . 'weaverx-subthemes/addon-subthemes/' . $name . '.jpg');
-            weaverx_save_msg('Deleted ' .
-                ucwords(str_replace('-',' ',$name )) . ' add-on subtheme.');
+            weaverx_save_msg(__('Deleted ','weaver-xtreme' /*adm*/) .
+                ucwords(str_replace('-',' ',$name )) . __(' add-on subtheme.','weaver-xtreme' /*adm*/));
         }
     }
 
@@ -222,25 +226,25 @@ function wvrx_ts_wunpackzip($uploaded, $to_dir) {
     $ext_check = end($end);
 
     if (false && !weaverx_f_file_access_available()) {
-        $errors[] = "Sorry - Aspen Theme unable to access files.<br />";
+        $errors[] = __('Sorry - Theme unable to access files.','weaver-xtreme' /*adm*/) . '<br />';
         $ok = false;
     }
 
     if ($filename == "") {
-        $errors[] = "You didn't select a file to upload.<br />";
+        $errors[] = __('You didn\'t select a file to upload.','weaver-xtreme' /*adm*/) . '<br />';
         $ok = false;
     }
 
     if ($ok && $ext_check != 'zip'){
-        $errors[] = "Uploaded files must have <em>.zip</em> extension.<br />";
+        $errors[] = __("Uploaded files must have <em>.zip</em> extension.",'weaver-xtreme' /*adm*/) . "<br />";
         $ok = false;
     }
 
     if ($ok) {
         if (!weaverx_f_exists($openname)) {
-            $errors[] = '<strong><em style="color:red;">
-Sorry, there was a problem uploading your file. You may need to check your folder permissions
-or other server settings.</em></strong><br />' . "(Trying to use file '$openname')";
+            $errors[] = '<strong><em style="color:red;">' .
+__('Sorry, there was a problem uploading your file. You may need to check your folder permissions
+or other server settings.','weaver-xtreme' /*adm*/) . '</em></strong><br />' . __('Trying to use file','weaver-xtreme' /*adm*/) . "'$openname'";
             $ok = false;
         }
     }
@@ -253,8 +257,8 @@ or other server settings.</em></strong><br />' . "(Trying to use file '$openname
                 $try2 = WP_Filesystem();
                 remove_filter('filesystem_method', 'wvrx_ts_wvx_return_direct');
                 if (!$try2) {
-                    $errors[] = 'Sorry, there\'s a problem trying to use the WordPress unzip function. Please
-    see the FAQ at weavertheme.com support for more information.';
+                    $errors[] = __('Sorry, there\'s a problem trying to use the WordPress unzip function. Please
+    see the FAQ at weavertheme.com support for more information.','weaver-xtreme' /*adm*/);
                     $ok = false;
                 }
         }
@@ -264,16 +268,16 @@ or other server settings.</em></strong><br />' . "(Trying to use file '$openname
         // $filename has name of file uploaded
         $is_error = unzip_file( $openname, $to_dir );
         if ( !is_wp_error( $is_error ) ) {
-            weaverx_save_msg('File ' . $filename . ' successfully uploaded and unpacked to: <br />' . $to_dir);
+            weaverx_save_msg(__('File ','weaver-xtreme' /*adm*/) . $filename . __(' successfully uploaded and unpacked to: <br />','weaver-xtreme' /*adm*/) . $to_dir);
             @unlink($openname);	// delete temp file...
         } else {
-            $errors[] = "Sorry, unpacking the .zip you selected file failed. You may have a corrupt .zip file, or there many a file permissions problem on your WordPress installation.";
+            $errors[] = __("Sorry, unpacking the .zip you selected file failed. You may have a corrupt .zip file, or there many a file permissions problem on your WordPress installation.",'weaver-xtreme' /*adm*/);
             $errors[] = $is_error->get_error_message();
             $ok = false;
         }
     }
     if (!$ok) {
-        echo '<div id="message" class="updated fade"><p><strong><em style="color:red;">ERROR</em></strong></p><p>';
+        echo '<div id="message" class="updated fade"><p><strong><em style="color:red;">' . __('ERROR','weaver-xtreme' /*adm*/) . '</em></strong></p><p>';
         foreach($errors as $error){
             echo $error.'<br />';
         }
@@ -285,11 +289,11 @@ or other server settings.</em></strong><br />' . "(Trying to use file '$openname
 
     add_action('weaverx_child_saverestore','wvrx_ts_child_saverestore_action');
 function wvrx_ts_child_saverestore_action() {
-    echo '<h3 class="atw-option-subheader" style="font-style:italic">Use the <em>Weaver Xtreme Subthemes</em>
+    echo '<h3 class="atw-option-subheader" style="font-style:italic">' . __('Use the <em>Weaver Xtreme Subthemes</em>
  tab to upload Add-on Subthemes.</h3><p>You can upload extra add-on subthemes you\'ve downloaded using the
  Subthemes tab. Note: the Save and Restore options on this page are for the custom settings you
  have created. These save/restore options are not related to Add-on Subthemes, although you can
- modify an Add-on Subtheme, and save your changes here.</p>';
+ modify an Add-on Subtheme, and save your changes here.</p>','weaver-xtreme' /*adm*/);
 }
 
 ?>

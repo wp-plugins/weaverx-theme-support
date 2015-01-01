@@ -252,7 +252,7 @@ function wvrx_ts_sc_iframe($args = '') {
 
     $sty = $style ? ' style="' . $style . '"' : '';
 
-    if (!$src) return '<h4>No src address provided to [iframe].</h4>';
+    if (!$src) return __('<h4>No src address provided to [iframe].</h4>','weaver-xtreme' /*adm*/);
     return "\n" . '<iframe src="' . $src . '" height="' .  $height . 'px" width="' . $percent . '%"' . $sty . '></iframe>' . "\n";
 }
 
@@ -269,7 +269,7 @@ function wvrx_ts_sc_tab_group( $args, $content ) {
     ), $args ) );
 
     if (isset($GLOBALS['wvrx_ts_in_tab_container']) && $GLOBALS['wvrx_ts_in_tab_container']) {
-	return '<strong>Sorry, you cannot nest tab_containers.</strong>';
+	return __('<strong>Sorry, you cannot nest tab_containers.</strong>','weaver-xtreme' /*adm*/);
     }
 
     // enqueue the theme support jslib only now when it will actually be needed!
@@ -393,7 +393,7 @@ function wvrx_ts_sc_youtube($args = '') {
     ), $args));
 
     if (!$share && !$id)
-        return '<strong>No share or id values provided for youtube shortcode.</strong>';
+        return __('<strong>No share or id values provided for youtube shortcode.</strong>','weaver-xtreme' /*adm*/);
 
     if ($share)	{	// let the share override any id
         $share = str_replace('youtu.be/','',$share);
@@ -481,7 +481,7 @@ function wvrx_ts_sc_vimeo($args = '') {
         'center' => '1'
         ), $args));
 
-    if (!$share && !$id) return '<strong>No share or id values provided for vimeo shortcode.</strong>';
+    if (!$share && !$id) return __('<strong>No share or id values provided for vimeo shortcode.</strong>','weaver-xtreme' /*adm*/);
 
     if ($share)	{	// let the share override any id
         $share = str_replace('http://vimeo.com/','',$share);
@@ -579,19 +579,19 @@ function wvrx_ts_sc_span($vals = '',$text) {     // [span] - all ===============
 
 function wvrx_ts_weaverx_sc_info() {           // [info]  ======================
     global $current_user;
-    $out = '<strong>Theme/User Info</strong><hr />';
+    $out = __('<strong>Theme/User Info</strong><hr />','weaver-xtreme' /*adm*/);
 
     get_currentuserinfo();
     if (isset($current_user->display_name)) {
-	$out .= '<em>User:</em> ' . $current_user->display_name . '<br />';
+	$out .= __('<em>User:</em> ','weaver-xtreme' /*adm*/) . $current_user->display_name . '<br />';
     }
     $out .= '&nbsp;&nbsp;' . wp_register('','<br />',false);
     $out .= '&nbsp;&nbsp;' . wp_loginout('',false) . '<br />';
 
-    $agent = 'Not Available';
+    $agent = __('Not Available','weaver-xtreme' /*adm*/);
     if (isset($_SERVER["HTTP_USER_AGENT"]) )
 	$agent = $_SERVER['HTTP_USER_AGENT'];
-    $out .= '<em>User Agent</em>: <small>' . $agent . '</small>';
+    $out .= __('<em>User Agent</em>:','weaver-xtreme' /*adm*/) . ' <small>' . $agent . '</small>';
     $out .= '<div id="example"></div>
 <script type="text/javascript">
 var txt = "";
@@ -611,10 +611,10 @@ txt+= "<em>Browser Width: </em>" + myWidth + " px</br>";
 document.getElementById("example").innerHTML=txt;
 </script>';
 
-    $out .= '<em>Feed title:</em> ' . get_bloginfo_rss('name') . '<br />' . get_wp_title_rss();
+    $out .= __('<em>Feed title:</em> ','weaver-xtreme' /*adm*/) . get_bloginfo_rss('name') . '<br />' . get_wp_title_rss();
 
-    $out .= '<br /><em>You are using</em> WordPress ' . $GLOBALS['wp_version'] . '<br /><em>PHP Version:</em> ' . phpversion();
-    $out .= '<br /><em>Memory:</em> ' . round(memory_get_usage()/1024/1024,2) . 'M of ' .  (int)ini_get('memory_limit') . 'M <hr />';
+    $out .= __('<br /><em>You are using</em> WordPress ','weaver-xtreme' /*adm*/) . $GLOBALS['wp_version'] . '<br /><em>PHP Version:</em> ' . phpversion();
+    $out .= __('<br /><em>Memory:</em> ','weaver-xtreme' /*adm*/) . round(memory_get_usage()/1024/1024,2) . 'M of ' .  (int)ini_get('memory_limit') . 'M <hr />';
     return $out;
 }
 
