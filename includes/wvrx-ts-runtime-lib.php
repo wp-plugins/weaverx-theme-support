@@ -61,11 +61,11 @@ Click the<span style="color:red; vertical-align: middle; margin-left:.25em;" cla
     <li><?php _e('<span class="wvr-blue">Hide If - [hide_if]</span> - Hide content','weaver-xtreme' /*adm*/); ?>
     </li>
 
-    <li><?php _e('<span class="wvr-blue">Site Tagline - [site_tagline]</span> - Display the site tagline','weaver-xtreme' /*adm*/); ?>
+    <li><?php _e('<span class="wvr-blue">Site Tagline - [site_tagline style="style" matchtheme=false]</span> - Display the site tagline','weaver-xtreme' /*adm*/); ?>
         <?php wvrx_ts_help_link('help.html#sitetitlesc',__('Help for Site Tagline','weaver-xtreme' /*adm*/));?><br />
         <code><?php _e("[site_tagline style='inline-style']",'weaver-xtreme' /*adm*/); ?></code>
     </li>
-    <li><?php _e('<span class="wvr-blue">Site Title - [site_title]</span> - Display the site title','weaver-xtreme' /*adm*/); ?>
+    <li><?php _e('<span class="wvr-blue">Site Title - [site_title style="style" matchtheme=false]</span> - Display the site title','weaver-xtreme' /*adm*/); ?>
         <?php wvrx_ts_help_link('help.html#sitetitlesc',__('Help for Site Title','weaver-xtreme' /*adm*/));?><br />
         <code><?php _e("[site_title style='inline-style']",'weaver-xtreme' /*adm*/); ?></code>
     </li>

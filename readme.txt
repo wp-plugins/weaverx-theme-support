@@ -8,7 +8,7 @@ Author: wpweaver
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.9
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 1.0
 
 A useful shortcode and widget collection for Weaver Xtreme
@@ -74,6 +74,9 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == ChangeLog ==
+
+= 0.95 =
+* Changed [ site_title ] and [ site_tagline ] to match theme style as option
 
 = 0.10 =
 * Fixed per page options when used with old Xtreme Plus version

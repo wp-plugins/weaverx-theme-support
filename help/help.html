@@ -461,21 +461,26 @@ a specific device, you give the <span class="code1">device</span> parameter a va
   </tr>
 </table>
 <p>&nbsp;</p>
-<h3><a name="sitetitlesc" id="sitetitlesc"></a><strong>[site_title], [site_tagline]</strong></h3>
+<h3><a name="sitetitlesc" id="sitetitlesc"></a><strong>[site_title style="style" matchtheme=false], [site_tagline style="style" matchtheme=false]</strong></h3>
 
 <p>The <code>[site_title]</code> and <code>[site_tagline]</code> shortcodes allow you display the current
-site title and site tagline. (The site tagline was formerly called the site description, thus the name of the shortcode.) This can be useful in a text widget in the Header Widget Area, for example.</p>
+site title and site tagline. This can be useful in a text widget in the Header Widget Area, for example.</p>
 <p><em>Note:</em> If you want to position the content of a text widget within the a cell of the Header Widget Area, you could use the following
 example:</p>
     <p><code>[site_title style='font-size:150%;position:absolute;padding-left:20px;padding-top:30px;']</code></p>
 
-<p><strong>Shortcode usage:</strong> <code>[site_title style='inline-style'] [site_tagline style='inline-style']</code>
+<p><strong>Shortcode usage:</strong> <code>[site_title style='inline-style' matchtheme=false] [site_tagline style='inline-style' matchtheme=false]</code>
 <br />
 <ol>
     <li><strong>style='inline-style-rules'</strong> - Allows you to add inline style to wrap output of the shortcode.
       Don't include the 'style=' or wrapping quotation marks. Do include a ';' at the end of each rule. The output will look like
       <code>style="your-rules;"</code> - using double quotation marks.
     </li>
+	<li><strong>matchtheme=true</strong> - Allows you to add match the theme styling as defined in the site header if set to true.
+	This will match the color/style/font of the header version of the site title and tagline with the exception of hide settings.
+	The shortcode version will not be hidden on any device unless you also wrap the shortcode with a [show_if/hide_if] shortcode.
+    </li>
+
     </ol>
 
 <h3><a name="bloginfo" id="bloginfo"></a><strong>[bloginfo arg='name' style='your css']</strong></h3>
