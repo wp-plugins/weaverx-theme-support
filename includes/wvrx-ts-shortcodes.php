@@ -217,28 +217,48 @@ function wvrx_ts_sc_bloginfo($args = '') {
 // ===============  [site_title style='customstyle'] ======================
 function wvrx_ts_sc_site_title($args = '') {
     extract(shortcode_atts(array(
-	    'style' => ''		/* styling for the header */
+	    'style' => '',		/* styling for the header */
+		'matchtheme' => false
     ), $args));
-    $title = esc_attr( get_bloginfo( 'name', 'display' ));
+
+	$title = esc_html( get_bloginfo( 'name', 'display' ));
+
+	$before = '';
+	$after = '';
+
+	if ( $matchtheme == 'true' || $matchtheme == 1 ) {
+		$before = '<h1' . weaverx_title_class( 'site_title', false, 'site-title' ) . '><a href="' .  esc_url( home_url( '/' ) ) . '" title="' . $title . '" rel="home">';
+		$after = '</a></h1>';
+	}
 
     if ($style) {
-        return '<span style="' . $style . '">' . $title . '</span>';
+        return $before . '<span style="' . $style . '">' . $title . '</span>' . $after;
     }
-    return $title;
+    return $before . $title . $after;
 
 }
 
-// ===============  [site_title style='customstyle'] ======================
+// ===============  [site_tagline style='customstyle'] ======================
 function wvrx_ts_sc_site_tagline($args = '') {
     extract(shortcode_atts(array(
-	    'style' => ''		/* styling for the header */
+	    'style' => '',		/* styling for the header */
+		'matchtheme' => false
     ), $args));
+
     $title = get_bloginfo( 'description' );
 
+	$before = '';
+	$after = '';
+
+	if ( $matchtheme == 'true' || $matchtheme == 1 ) {
+		$before = '<h2' . weaverx_title_class( 'tagline', false, 'site-tagline' ) . '>';
+		$after = '</h2>';
+	}
+
     if ($style) {
-        return '<span style="' . $style . '">' . $title . '</span>';
+        return $before . '<span style="' . $style . '">' . $title . '</span>' . $after;
     }
-        return $title;
+    return $before . $title . $after;
 }
 
 // ===============  [iframe src='address' height=nnn] ======================
