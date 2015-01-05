@@ -75,6 +75,9 @@ This is the initial release of this plugin.
 
 == ChangeLog ==
 
+= 0.95.1 =
+* Only load if Weaver Xtreme is the active theme.
+
 = 0.95 =
 * Changed [ site_title ] and [ site_tagline ] to match theme style as option
 
