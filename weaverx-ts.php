@@ -5,7 +5,7 @@ Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.95.1
+Version: 0.96
 License: GPL V3
 
 Weaver X Theme Support
@@ -33,7 +33,7 @@ $theme = get_template_directory();
 
 if ( strpos( $theme, '/weaver-xtreme') !== false ) {		// only load if Weaver Xtreme is the theme
 
-define ('WVRX_TS_VERSION','0.95.1');
+define ('WVRX_TS_VERSION','0.96');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 define ('WVRX_TS_APPEARANCE_PAGE', false );
 
@@ -69,12 +69,39 @@ add_action('wp_enqueue_scripts', 'wvrx_ts_enqueue_scripts' );
 
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-runtime-lib.php'); // NOW - load the basic library
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-widgets.php'); 		// widgets runtime library
-
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-shortcodes.php'); // load the shortcode definitions
 
-//if (current_user_can('edit_posts')) { // allows only admin to see, also avoids loading at runtime (current_user_can not available for plugins)
-require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
-//}
+if ( ! ( function_exists( 'weaverxplus_plugin_installed' ) && version_compare(WEAVER_XPLUS_VERSION,'0.13','>') ) ) {
+
+add_action('admin_menu', 'wvrx_ts_add_page_fields',11);	// allow X-Plus to override us
+
+function wvrx_ts_add_page_fields() {
+	add_meta_box('page-box', __('Weaver Xtreme Options For This Page (Theme Support Per Page Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_page_extras_load', 'page', 'normal', 'high');
+	add_meta_box('post-box', __('Weaver Xtreme Options For This Post (Theme Support Per Post Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras_load', 'post', 'normal', 'high');
+	global $post;
+	$opts = get_option( apply_filters('weaverx_options','weaverx_settings') , array());	// need to fetch Weaver Xtreme options
+	if (isset($opts['_show_per_post_all']) && $opts['_show_per_post_all']) {
+		$i = 1;
+		$args=array( 'public'   => true, '_builtin' => false );
+		$post_types=get_post_types($args,'names','and');
+		foreach ($post_types  as $post_type ) {
+			add_meta_box('post-box' . $i, __('Weaver Xtreme Options For This Post','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras', $post_type, 'normal', 'high');
+			$i++;
+		}
+	}
+}
+
+function wvrx_ts_page_extras_load() {
+	// don't load this file until we REALLY have to.
+	require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
+	wvrx_ts_page_extras();
+}
+
+function wvrx_ts_post_extras_load() {
+	require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
+	wvrx_ts_post_extras();
+}
+}
 
 // ======================================== subthemes ========================================
 add_action('weaverx_child_show_extrathemes','wvrx_ts_child_show_extrathemes_action');

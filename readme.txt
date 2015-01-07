@@ -75,6 +75,10 @@ This is the initial release of this plugin.
 
 == ChangeLog ==
 
+= 0.96 =
+* Fixed bug with Per page options on Page with Posts
+* Internal optimizations
+
 = 0.95.1 =
 * Only load if Weaver Xtreme is the active theme.
 

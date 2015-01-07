@@ -9,25 +9,8 @@
 if ( !defined('ABSPATH')) exit; // Exit if accessed directly
 // Admin panel that gets added to the page edit page for per page options
 
+
 if ( ! ( function_exists( 'weaverxplus_plugin_installed' ) && version_compare(WEAVER_XPLUS_VERSION,'0.13','>') ) ) {
-
-add_action('admin_menu', 'wvrx_ts_add_page_fields');
-
-function wvrx_ts_add_page_fields() {
-	add_meta_box('page-box', __('Weaver Xtreme Options For This Page (Theme Support Per Page Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_page_extras', 'page', 'normal', 'high');
-	add_meta_box('post-box', __('Weaver Xtreme Options For This Post (Theme Support Per Post Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras', 'post', 'normal', 'high');
-	global $post;
-	$opts = get_option( apply_filters('weaverx_options','weaverx_settings') , array());	// need to fetch Weaver Xtreme options
-	if (isset($opts['_show_per_post_all']) && $opts['_show_per_post_all']) {
-		$i = 1;
-		$args=array( 'public'   => true, '_builtin' => false );
-		$post_types=get_post_types($args,'names','and');
-		foreach ($post_types  as $post_type ) {
-			add_meta_box('post-box' . $i, __('Weaver Xtreme Options For This Post','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras', $post_type, 'normal', 'high');
-			$i++;
-		}
-	}
-}
 
 function wvrx_ts_isp_true($val) {
 	if ($val) return true;
@@ -387,10 +370,10 @@ The settings will be combined for the final filtered list of posts displayed.
 	value="<?php echo esc_textarea(get_post_meta($post->ID, "_pp_post_type", true)); ?>" />
 	<?php _e('<em>Custom Post Type</em> - Enter slug of one custom post type to display','weaver-xtreme' /*adm*/); ?> <br />
 
-	<?php weaverx_pwp_atw_show_post_filter(); ?>
+	<?php wvrx_ts_pwp_atw_show_post_filter(); ?>
 
-	<?php weaverx_pwp_type(); ?><br />
-	<?php weaverx_pwp_cols(); ?><br />
+	<?php wvrx_ts_pwp_type(); ?><br />
+	<?php wvrx_ts_pwp_cols(); ?><br />
 	<input type="text" size="5" id="_pp_fullposts" name="_pp_fullposts"
 	value="<?php echo esc_textarea(get_post_meta($post->ID, "_pp_fullposts", true)); ?>" />
 	<?php _e("<em>Don't excerpt 1st <em>\"n\"</em> Posts</em> - Display the non-excerpted post for the first \"n\" posts.",'weaver-xtreme' /*adm*/); ?>

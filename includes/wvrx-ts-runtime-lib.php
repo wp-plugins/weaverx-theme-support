@@ -53,6 +53,10 @@ Click the<span style="color:red; vertical-align: middle; margin-left:.25em;" cla
         <?php wvrx_ts_help_link('help.html#sciframe',__('Help for iframe','weaver-xtreme' /*adm*/));?><br />
         <code><?php _e("[iframe src='http://example.com' height=600 percent=100 style='style']",'weaver-xtreme' /*adm*/); ?></code>
     </li>
+	<li><?php _e('<span class="wvr-blue">Login - [login]</span> - Show simple Login/Logout link','weaver-xtreme' /*adm*/); ?>
+        <?php wvrx_ts_help_link('help.html#sclogin',__('Help for login','weaver-xtreme' /*adm*/));?><br />
+        <code><?php _e("[login]",'weaver-xtreme' /*adm*/); ?></code>
+    </li>
 
     <li><?php _e('<span class="wvr-blue">Show If- [show_if]</span> - Show content only if args meet specified conditions','weaver-xtreme' /*adm*/); ?>
         <?php wvrx_ts_help_link('help.html#scshowif',__('Help for Show/Hide If','weaver-xtreme' /*adm*/));?><br />
