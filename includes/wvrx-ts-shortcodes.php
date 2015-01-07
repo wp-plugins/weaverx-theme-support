@@ -14,6 +14,7 @@ function wvrx_ts_setup_shortcodes() {
     array('hide_if' => 'wvrx_ts_sc_hide_if' ),	      		// [hide_if]
     array('html' => 'wvrx_ts_sc_html'),		// [html]
     array('iframe' => 'wvrx_ts_sc_iframe'),         // [iframe]
+	array('login' => 'wvrx_ts_sc_login'),		// [login]
     array('show_if' => 'wvrx_ts_sc_show_if' ),	      		// [show_if]
 	array('span' => 'wvrx_ts_sc_span'),	    // [span]
 	array('site_tagline' => 'wvrx_ts_sc_site_tagline'),   // [site_tagline]
@@ -276,7 +277,13 @@ function wvrx_ts_sc_iframe($args = '') {
     return "\n" . '<iframe src="' . $src . '" height="' .  $height . 'px" width="' . $percent . '%"' . $sty . '></iframe>' . "\n";
 }
 
+// ===============  [iframe src='address' height=nnn] ======================
+function wvrx_ts_sc_login($args = '') {
+    extract(shortcode_atts(array(
+    ), $args));
 
+    return wp_loginout( '', false );
+}
 
 // ===============  [tab_group ] ======================
 function wvrx_ts_sc_tab_group( $args, $content ) {
