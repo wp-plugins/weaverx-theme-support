@@ -5,7 +5,7 @@ Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.96
+Version: 0.97
 License: GPL V3
 
 Weaver X Theme Support
@@ -33,7 +33,7 @@ $theme = get_template_directory();
 
 if ( strpos( $theme, '/weaver-xtreme') !== false ) {		// only load if Weaver Xtreme is the theme
 
-define ('WVRX_TS_VERSION','0.96');
+define ('WVRX_TS_VERSION','0.97');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 define ('WVRX_TS_APPEARANCE_PAGE', false );
 
@@ -89,16 +89,15 @@ function wvrx_ts_add_page_fields() {
 			$i++;
 		}
 	}
+require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin - needs to be here
+
 }
 
 function wvrx_ts_page_extras_load() {
-	// don't load this file until we REALLY have to.
-	require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
 	wvrx_ts_page_extras();
 }
 
 function wvrx_ts_post_extras_load() {
-	require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-admin-page-posts.php');	// per page-posts admin
 	wvrx_ts_post_extras();
 }
 }
@@ -315,7 +314,6 @@ or other server settings.','weaver-xtreme' /*adm*/) . '</em></strong><br />' . _
     }
     return $ok;
 }
-
 
     add_action('weaverx_child_saverestore','wvrx_ts_child_saverestore_action');
 function wvrx_ts_child_saverestore_action() {
