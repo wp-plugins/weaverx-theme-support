@@ -75,6 +75,9 @@ This is the initial release of this plugin.
 
 == ChangeLog ==
 
+= 0.97 =
+* Minor tweaks
+
 = 0.96 =
 * Fixed bug with Per page options on Page with Posts
 * Internal optimizations

@@ -454,8 +454,7 @@ __('Enter optional per post CSS style rules. <strong>Do not</strong> include the
 Include the {}\'s. Don\'t use class names if rules apply to whole post, but do include class names
 (e.g., <em>.entry-title a</em>) for specific elements. Custom styles will not be displayed by the Post Editor.','weaver-xtreme' /*adm*/); ?>
 <br />
-	<textarea name="_pp_post_style" rows=2 style="width: 95%"><?php echo(get_post_meta($post->ID, "_pp_post_style", true)); ?>
-	</textarea>
+	<textarea name="_pp_post_style" rows=2 style="width: 95%"><?php echo(get_post_meta($post->ID, "_pp_post_style", true)); ?></textarea>
 <br />
 <br />
 <p><strong><?php _e('<em>Single Page View:</em> Sidebars','weaver-xtreme' /*adm*/); ?></strong></p>
@@ -560,6 +559,7 @@ function wvrx_ts_save_post_fields($post_id) {
 	'_primary-widget-area', '_secondary-widget-area', '_header-widget-area', '_footer-widget-area', '_sitewide-top-widget-area',
 	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area'
 	);
+
 if (weaverx_allow_multisite()) {
 	array_push($default_post_fields, '_pp_raw_html');
 }
