@@ -80,8 +80,15 @@ without modifying theme or plugin .css files.
 	border-right: 1px solid #888;
 	border-left: 1px solid #888;
 	background: #ccc;                   /* tab-bg */
-        border-top-left-radius:6px;
-        border-top-right-radius:6px;
+    border-top-left-radius:6px;
+    border-top-right-radius:6px;
+	position:relative;
+	z-index:1;
+}
+
+.wvr-tabs-style .wvr-tabs-nav span.wvr-tabs-current {
+	position:relative;
+	z-index:3;
 }
 
 .wvr-tabs-style .wvr-tabs-nav span.wvr-tabs-current,
@@ -91,7 +98,9 @@ without modifying theme or plugin .css files.
 
 .wvr-tabs-style .wvr-tabs-pane {
 	padding: 15px;
-        border: 1px solid #888;        /* border-color */
-        min-height:20px;               /* pane-min-height */
-        background-color:transparent;        /* pane-bg */
+    border: 1px solid #888;        /* border-color */
+    min-height:20px;               /* pane-min-height */
+    background-color:transparent;        /* pane-bg */
+	position:relative;
+	z-index:2;
 }

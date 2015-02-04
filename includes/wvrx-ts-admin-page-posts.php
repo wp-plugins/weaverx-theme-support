@@ -188,7 +188,7 @@ function wvrx_ts_page_extras() {
 	) {
 		if (isset($opts['_show_per_post_all']) && $opts['_show_per_post_all'])
 			echo '<p>' .
-__('You can enable Weaver Xtreme Per Page Options for Custom Post Types on the Weaver X:Advanced Options:Admin Options tab.','weaver-xtreme' /*adm*/) .
+__('You can enable Weaver Xtreme Per Page Options for Custom Post Types on the Weaver Xtreme:Advanced Options:Admin Options tab.','weaver-xtreme' /*adm*/) .
 		'</p>';
 		else
 			echo '<p>' . __('Weaver Xtreme Per Page Options not available for your User Role.','weaver-xtreme' /*adm*/) . '</p>';
