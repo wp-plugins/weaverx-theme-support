@@ -26,9 +26,11 @@ function wvrx_ts_setup_shortcodes() {
 	array('weaverx_info' => 'wvrx_ts_weaverx_sc_info'),     // [weaverx_info]
     );
 
-   foreach ($codes as $code) {
-	wvrx_ts_set_shortcodes($code);
-   }
+	$prefix = get_option('wvrx_toggle_shortcode_prefix');
+
+	foreach ($codes as $code) {
+		wvrx_ts_set_shortcodes($code, $prefix);
+	}
 }
 
 add_action('init', 'wvrx_ts_setup_shortcodes');  // allow shortcodes to load after theme has loaded so we know which version to use
@@ -646,10 +648,10 @@ document.getElementById("example").innerHTML=txt;
 }
 
 
-function wvrx_ts_set_shortcodes($sc_list) {
+function wvrx_ts_set_shortcodes($sc_list, $prefix) {
     foreach ($sc_list as $sc_name => $sc_func) {
-        remove_shortcode($sc_name);
-        add_shortcode($sc_name,$sc_func);
+        remove_shortcode($prefix . $sc_name);
+        add_shortcode($prefix . $sc_name,$sc_func);
     }
 }
 

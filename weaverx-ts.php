@@ -5,7 +5,7 @@ Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 0.97
+Version: 1.0
 License: GPL V3
 
 Weaver X Theme Support
@@ -33,7 +33,7 @@ $theme = get_template_directory();
 
 if ( strpos( $theme, '/weaver-xtreme') !== false ) {		// only load if Weaver Xtreme is the theme
 
-define ('WVRX_TS_VERSION','0.97');
+define ('WVRX_TS_VERSION','1.0');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 define ('WVRX_TS_APPEARANCE_PAGE', false );
 
@@ -52,7 +52,6 @@ function wvrx_ts_enqueue_scripts() {	// action definition
 
     //-- Weaver X PLus js lib - requires jQuery...
 
-
     // put the enqueue script in the tabs shortcode where it belongs
 
     //wp_enqueue_script('wvrxtsJSLib', wvrx_ts_plugins_url('/js/wvrx-ts-jslib', WVRX_TS_MINIFY . '.js'),array('jquery'),WVRX_TS_VERSION);
@@ -65,7 +64,6 @@ function wvrx_ts_enqueue_scripts() {	// action definition
 }
 
 add_action('wp_enqueue_scripts', 'wvrx_ts_enqueue_scripts' );
-
 
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-runtime-lib.php'); // NOW - load the basic library
 require_once(dirname( __FILE__ ) . '/includes/wvrx-ts-widgets.php'); 		// widgets runtime library
@@ -80,12 +78,12 @@ function wvrx_ts_add_page_fields() {
 	add_meta_box('post-box', __('Weaver Xtreme Options For This Post (Theme Support Per Post Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras_load', 'post', 'normal', 'high');
 	global $post;
 	$opts = get_option( apply_filters('weaverx_options','weaverx_settings') , array());	// need to fetch Weaver Xtreme options
-	if (isset($opts['_show_per_post_all']) && $opts['_show_per_post_all']) {
+	if ((isset($opts['_show_per_post_all']) && $opts['_show_per_post_all']) || function_exists('atw_slider_plugins_loaded') ) {
 		$i = 1;
 		$args=array( 'public'   => true, '_builtin' => false );
-		$post_types=get_post_types($args,'names','and');
+		$post_types = get_post_types($args,'names','and');
 		foreach ($post_types  as $post_type ) {
-			add_meta_box('post-box' . $i, __('Weaver Xtreme Options For This Post','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras', $post_type, 'normal', 'high');
+			add_meta_box('post-box' . $i, __('Weaver Xtreme Options For This Post (Theme Support Per Post Options)','weaver-xtreme' /*adm*/), 'wvrx_ts_post_extras', $post_type, 'normal', 'high');
 			$i++;
 		}
 	}
@@ -227,6 +225,17 @@ Weaver Xtreme theme file in the /weaverx-subthemes/addon-subthemes directory.','
         // they've supplied and uploaded a file
         $ok = wvrx_ts_wunpackzip('uploaded_addon', weaverx_f_uploads_base_dir() . 'weaverx-subthemes/addon-subthemes/');
     }
+
+	else if ( weaverx_submitted('toggle_shortcode_prefix') ) {
+		$val = get_option('wvrx_toggle_shortcode_prefix');
+		if ( $val ) {
+			delete_option('wvrx_toggle_shortcode_prefix');
+			weaverx_save_msg(__("Weaver Xtreme Theme Support Shortcodes NOT prefixed with 'wvrx_'", 'weaver-xtreme'));
+		} else {
+			update_option('wvrx_toggle_shortcode_prefix', 'wvrx_');
+			weaverx_save_msg(__("Weaver Xtreme Theme Support Shortcodes now prefixed with 'wvrx_'", 'weaver-xtreme'));
+		}
+	}
 
 }
 

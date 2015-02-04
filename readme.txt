@@ -75,8 +75,9 @@ This is the initial release of this plugin.
 
 == ChangeLog ==
 
-= 0.97 =
+= 1.0 =
 * Minor tweaks
+* wvrx_ shortcode prefix option
 
 = 0.96 =
 * Fixed bug with Per page options on Page with Posts
