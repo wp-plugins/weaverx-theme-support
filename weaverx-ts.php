@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name: Weaver X Theme Support
+Plugin Name: Weaver Xtreme Theme Support
 Plugin URI: http://weavertheme.com/plugins
 Description: Weaver X Theme Support - a package of useful shortcodes and widgets that integrates closely with the Weaver X theme. This plugin Will also allow you to switch from Weaver X to any other theme and still be able to use the shortcodes and widgets from Weaver X with minimal effort.
 Author: wpweaver
 Author URI: http://weavertheme.com/about/
-Version: 1.0
+Version: 1.0.1
 License: GPL V3
 
-Weaver X Theme Support
+Weaver Xtreme Theme Support
 
 Copyright (C) 2014, Bruce E. Wampler - weaver@weavertheme.com
 
@@ -33,7 +33,7 @@ $theme = get_template_directory();
 
 if ( strpos( $theme, '/weaver-xtreme') !== false ) {		// only load if Weaver Xtreme is the theme
 
-define ('WVRX_TS_VERSION','1.0');
+define ('WVRX_TS_VERSION','1.0.1');
 define ('WVRX_TS_MINIFY','.min');		// '' for dev, '.min' for production
 define ('WVRX_TS_APPEARANCE_PAGE', false );
 
@@ -235,6 +235,8 @@ Weaver Xtreme theme file in the /weaverx-subthemes/addon-subthemes directory.','
 			update_option('wvrx_toggle_shortcode_prefix', 'wvrx_');
 			weaverx_save_msg(__("Weaver Xtreme Theme Support Shortcodes now prefixed with 'wvrx_'", 'weaver-xtreme'));
 		}
+	} else if ( weaverx_submitted('show_per_page_report')) {
+		wvrx_ts_per_page_report();
 	}
 
 }
@@ -331,6 +333,64 @@ function wvrx_ts_child_saverestore_action() {
  Subthemes tab. Note: the Save and Restore options on this page are for the custom settings you
  have created. These save/restore options are not related to Add-on Subthemes, although you can
  modify an Add-on Subtheme, and save your changes here.</p>','weaver-xtreme' /*adm*/);
+}
+
+// --------------------------------------
+function wvrx_ts_per_page_report() {
+	echo '<div style="border:1px solid black; padding:1em;background:#F8FFCC;width:70%;margin:1em auto 1em auto;">';
+	echo "<h2>" . __('Show Pages and Posts with  Per Page / Per Post Settings','weaverx-axtreme') . "</h2>\n";
+	echo "<h3>" . __('Posts','weaverx-axtreme') . "</h3>\n";
+	wvrx_ts_scan_section('post');
+	echo "<h3>" . __('Pages','weaverx-axtreme') . "</h3>\n";
+	wvrx_ts_scan_section('page');
+	echo "</div>\n";
+}
+
+function wvrx_ts_scan_section($what) {
+
+	$post_fields = array('_pp_category', '_pp_tag', '_pp_onepost', '_pp_orderby', '_pp_sort_order',
+	'_pp_author', '_pp_posts_per_page', '_pp_primary-widget-area', '_pp_secondary-widget-area', '_pp_sidebar_width',
+	'_pp_top-widget-area','_pp_bottom-widget-area','_pp_sitewide-top-widget-area', '_pp_sitewide-bottom-widget-area',
+	'_pp_post_type', '_pp_hide_page_title','_pp_hide_site_title','_pp_hide_menus','_pp_hide_header_image',
+	'_pp_hide_footer','_pp_hide_header','_pp_hide_sticky', '_pp_force_post_full','_pp_force_post_excerpt',
+	'_pp_show_post_avatar', '_pp_bodyclass', '_pp_fi_link', '_pp_fi_location', '_pp_post_styles',
+	'_pp_hide_top_post_meta','_pp_hide_bottom_post_meta', '_pp_stay_on_page', '_pp_hide_on_menu', '_pp_show_featured_img',
+	'_pp_hide_infotop','_pp_hide_infobottom', '_pp_hide_visual_editor', '_pp_masonry_span2', '_show_post_bubble',
+	'_pp_hide_post_title', '_pp_post_add_link', '_pp_hide_post_format_label', '_pp_page_layout', '_pp_wvrx_pwp_type',
+	'_pp_wvrx_pwp_cols', '_pp_post_filter', '_pp_header-widget-area' ,'_pp_footer-widget-area',
+	'_pp_hide_page_infobar', '_pp_hide_n_posts','_pp_fullposts', '_pp_pwp_masonry','_pp_pwp_compact','_pp_pwp_compact_posts',
+	'_primary-widget-area', '_secondary-widget-area', '_header-widget-area', '_footer-widget-area', '_sitewide-top-widget-area',
+	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area'
+	);
+
+	$args = array('posts_per_page' => -1, 'post_type' => $what, 'post_status' => 'any' );
+	echo '<ul>';
+
+	$allposts = get_posts($args);
+	foreach ($allposts as $post) {
+		$id = $post->ID;
+		setup_postdata($post);
+		$meta = get_post_meta( $id );
+		if (!empty($meta)) {
+			$type = $post->post_type;
+			$title = esc_html($post->post_title);
+			$link = esc_url(get_permalink($id));
+			$tlink = "<a href='{$link}' alt='Post {$id}' target='_blank'>{$title}</a>";
+			$heading = false;
+			foreach ($meta as $name => $val_array) {		// old value gets put into $val_array[0]
+				if (in_array($name, $post_fields) ) {
+					$val = $val_array[0];					// easier to work with
+					if ($type == 'page') {
+						echo "<li><strong><em>{$tlink}</em></strong> " . __('has Per Page settings.','weaverx-axtreme') . "</li>\n";
+					} else {
+						echo "<li><strong><em>{$tlink}</em></strong> " . __('has Per Post settings.','weaverx-axtreme') . "</li>\n";
+					}
+					break;
+				}
+			}
+		}
+	}
+	echo '</ul>';
 }
 }
 ?>

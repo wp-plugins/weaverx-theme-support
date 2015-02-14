@@ -9,7 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 A useful shortcode and widget collection for Weaver Xtreme
 
@@ -74,6 +74,11 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == ChangeLog ==
+
+= 1.0.1 =
+* New - Per Page/Post Report from Add-ons menu
+* Fix: '\1234' values in per post style
+* Fix: Internal name of Per Post Style - may cause loss of prevoius setting - sorry
 
 = 1.0 =
 * Minor tweaks
