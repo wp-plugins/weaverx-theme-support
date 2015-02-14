@@ -10,7 +10,7 @@ if ( !defined('ABSPATH')) exit; // Exit if accessed directly
 // Admin panel that gets added to the page edit page for per page options
 
 
-if ( ! ( function_exists( 'weaverxplus_plugin_installed' ) && version_compare(WEAVER_XPLUS_VERSION,'0.13','>') ) ) {
+if ( ! function_exists( 'weaverxplus_plugin_installed' ) ) {
 
 function wvrx_ts_isp_true($val) {
 	if ($val) return true;
@@ -454,7 +454,7 @@ __('Enter optional per post CSS style rules. <strong>Do not</strong> include the
 Include the {}\'s. Don\'t use class names if rules apply to whole post, but do include class names
 (e.g., <em>.entry-title a</em>) for specific elements. Custom styles will not be displayed by the Post Editor.','weaver-xtreme' /*adm*/); ?>
 <br />
-	<textarea name="_pp_post_style" rows=2 style="width: 95%"><?php echo(get_post_meta($post->ID, "_pp_post_style", true)); ?></textarea>
+	<textarea name="_pp_post_styles" rows=2 style="width: 95%"><?php echo(get_post_meta($post->ID, "_pp_post_styles", true)); ?></textarea>
 <br />
 <br />
 <p><strong><?php _e('<em>Single Page View:</em> Sidebars','weaver-xtreme' /*adm*/); ?></strong></p>
@@ -550,7 +550,7 @@ function wvrx_ts_save_post_fields($post_id) {
 	'_pp_top-widget-area','_pp_bottom-widget-area','_pp_sitewide-top-widget-area', '_pp_sitewide-bottom-widget-area',
 	'_pp_post_type', '_pp_hide_page_title','_pp_hide_site_title','_pp_hide_menus','_pp_hide_header_image',
 	'_pp_hide_footer','_pp_hide_header','_pp_hide_sticky', '_pp_force_post_full','_pp_force_post_excerpt',
-	'_pp_show_post_avatar', '_pp_bodyclass', '_pp_fi_link', '_pp_fi_location', '_pp_post_style',
+	'_pp_show_post_avatar', '_pp_bodyclass', '_pp_fi_link', '_pp_fi_location', '_pp_post_styles',
 	'_pp_hide_top_post_meta','_pp_hide_bottom_post_meta', '_pp_stay_on_page', '_pp_hide_on_menu', '_pp_show_featured_img',
 	'_pp_hide_infotop','_pp_hide_infobottom', '_pp_hide_visual_editor', '_pp_masonry_span2', '_show_post_bubble',
 	'_pp_hide_post_title', '_pp_post_add_link', '_pp_hide_post_format_label', '_pp_page_layout', '_pp_wvrx_pwp_type',
@@ -569,7 +569,9 @@ if (weaverx_allow_multisite()) {
 	if (isset($_POST['post_meta'])) {
 		foreach ($all_post_fields as $post_field) {
 			if (isset($_POST[$post_field])) {
-				$data = stripslashes($_POST[$post_field]);
+				$data = $_POST[$post_field];
+				if ( $post_field != '_pp_post_styles')
+					$data = stripslashes($data);		// passed via post, so strip slashes
 
 				if (get_post_meta($post_id, $post_field) == '') {
 					add_post_meta($post_id, $post_field, weaverx_filter_textarea($data), true);

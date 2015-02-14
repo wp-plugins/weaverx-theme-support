@@ -137,7 +137,17 @@ Click the<span style="color:red; vertical-align: middle; margin-left:.25em;" cla
         <?php wvrx_ts_help_link('help.html#widg_text_2',__('Help for Two Column Text Widget','weaver-xtreme' /*adm*/));?>
     </li>
     </ul>
+
+
+	<h3><?php _e('Per Page/Post Settings','weaver-xtreme' /*adm*/); ?></h3>
+	<p> <?php _e("Click the following button to produce a list of links to all pages and posts that have Per Page or Per Post settings.", 'weaver-xtreme /*adm*/'); ?></p>
+	<div style="clear:both;"></div>
+		<form enctype="multipart/form-data" name='toggle_shortcode' action="<?php echo $_SERVER["REQUEST_URI"]; ?>" method='post'>
+        <span class='submit'><input name="show_per_page_report" type="submit" value="<?php _e('Show Pages and Posts with Per Page/Post Settings', 'weaver-xtreme /*adm*/'); ?>" /></span>
+        <?php weaverx_nonce_field('show_per_page_report'); ?>
+		</form><br /><br />
 </div>
+
 <?php
 }
 ?>
