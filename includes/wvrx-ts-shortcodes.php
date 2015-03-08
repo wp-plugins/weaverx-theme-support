@@ -485,7 +485,7 @@ function wvrx_ts_sc_youtube($args = '') {
     }
 
 	$ret ="\n" . $cntr1 . '<iframe src="' . $url
-     . '" frameborder="0" width="'.$w.'" height="' . $h . '" frameborder="0" ' . $allowfull . '"></iframe>'
+     . '" frameborder="0" width="'.$w.'" height="' . $h . '" frameborder="0" ' . $allowfull . '></iframe>'
      . $cntr2 . "\n";
 
     return $ret;
