@@ -1,6 +1,6 @@
-=== Weaver X Theme Support ===
-Plugin Name: Weaver X Theme Support
-Plugin URI: http://aspentheme.com/plugins/
+=== Weaver Xtreme Theme Support ===
+Plugin Name: Weaver Xtreme Theme Support
+Plugin URI: http://weavertheme.com/plugins/
 Tags: weaver x theme, shortcodes, widgets
 Author URI: http://weavertheme.com/about/
 Contributors: wpweaver
@@ -9,7 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.0.1
+Stable tag: 1.0.3
 
 A useful shortcode and widget collection for Weaver Xtreme
 
@@ -74,6 +74,11 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == ChangeLog ==
+= 1.0.3 =
+* Fix: extra " in [ youtube ]
+
+= 1.0.2 =
+* Fix: z-index rule for tab shortcode
 
 = 1.0.1 =
 * New - Per Page/Post Report from Add-ons menu

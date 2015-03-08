@@ -238,8 +238,8 @@ the <em></em>&mdash; Select &mdash;</em> default value.','weaver-xtreme' /*adm*/
 	wvrx_ts_page_checkbox('_pp_hide_page_infobar',__('Hide Info Bar on this page','weaver-xtreme' /*adm*/));
 	wvrx_ts_page_checkbox('_pp_hide_footer',__('Hide Entire Footer','weaver-xtreme' /*adm*/),33,1);
 
-
-	wvrx_ts_page_checkbox('_pp_hide_page_title',__('Hide Page Title','weaver-xtreme' /*adm*/),33,2);
+	wvrx_ts_page_checkbox('_pp_hide_page_title',__('Hide Page Title','weaver-xtreme' /*adm*/));
+	wvrx_ts_page_checkbox('_pp_full_browser_height',__('Force full browser height','weaver-xtreme' /*adm*/),33,2);
 
 	_e('<em>Note:</em> the following options work with the default menu - not custom menus.','weaver-xtreme' /*adm*/);
 	weaverx_html_br();
@@ -557,7 +557,7 @@ function wvrx_ts_save_post_fields($post_id) {
 	'_pp_wvrx_pwp_cols', '_pp_post_filter', '_pp_header-widget-area' ,'_pp_footer-widget-area',
 	'_pp_hide_page_infobar', '_pp_hide_n_posts','_pp_fullposts', '_pp_pwp_masonry','_pp_pwp_compact','_pp_pwp_compact_posts',
 	'_primary-widget-area', '_secondary-widget-area', '_header-widget-area', '_footer-widget-area', '_sitewide-top-widget-area',
-	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area'
+	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area', '_pp_full_browser_height'
 	);
 
 if (weaverx_allow_multisite()) {
