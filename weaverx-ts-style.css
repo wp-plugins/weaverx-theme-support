@@ -104,7 +104,5 @@ without modifying theme or plugin .css files.
 	position:relative;
 	z-index:2;
 }
-.wvr-tabs-nav {
-	position:relative;
-	z-index:3;
-}
+
+.wvr-tabs-panes {position:relative;z-index:2;}		/* add line to tab */

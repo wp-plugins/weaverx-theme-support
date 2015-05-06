@@ -117,9 +117,9 @@ if ( function_exists( 'atw_showposts_installed' ) ) {
 		}
 	}
 	echo '</select>&nbsp;' .
-__('Use a Filter from <em>ATW Show Posts Plugin</em> <strong>instead</strong> of above post selection options.','weaver-xtreme' /*adm*/) .
+__('Use a Filter from <em>Weaver Show Posts Plugin</em> <strong>instead</strong> of above post selection options.','weaver-xtreme' /*adm*/) .
 '<br /> <span style="margin-left:8em;"><span>' .
-__('(Note: ATW Show Posts <em>Post Display</em> options and <em>Use Paging</em> option <strong>not</strong> used for posts using this filter.)','weaver-xtreme' /*adm*/) .
+__('(Note: Weaver Show Posts <em>Post Display</em> options and <em>Use Paging</em> option <strong>not</strong> used for posts using this filter.)','weaver-xtreme' /*adm*/) .
 '<br />' . '<br />';
 } else {
 _e('<strong>Want More Post Filtering Options?</strong> Install the <em>Aspen Themeworks Show Posts</em> plugin for more filtering options.','weaver-xtreme' /*adm*/); ?>
@@ -144,15 +144,33 @@ function wvrx_ts_pwp_type() {
 }
 
 
+function wvrx_ts_page_cols() {
+
+	$opts = array( 'name' => '', 'id' => '_pp_page_cols',
+		'info' => __('Display page content in this many columns using CSS column rules.','weaver-xtreme' /*adm*/),
+		'value' => array(
+			array('val' => '', 'desc' => '&nbsp;'),
+			array('val' => '1', 'desc' => __('1 Column','weaver-xtreme' /*adm*/) ),
+			array('val' => '2', 'desc' => __('2 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '3', 'desc' => __('3 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '4', 'desc' => __('4 Columns','weaver-xtreme' /*adm*/) ))
+		);
+	wvrx_ts_pp_select_id($opts);
+
+	weaverx_html_br();
+	weaverx_html_br();
+}
+
+
 function wvrx_ts_pwp_cols() {
 
 	$opts = array( 'name' => __('Display post columns:','weaver-xtreme' /*adm*/), 'id' => '_pp_wvrx_pwp_cols',
 		'info' => __('Display posts in this many columns - left to right, then top to bottom','weaver-xtreme' /*adm*/),
 		'value' => array(
 			array('val' => '', 'desc' => '&nbsp;'),
-			array('val' => '1', 'desc' => __('One Column','weaver-xtreme' /*adm*/) ),
-			array('val' => '2', 'desc' => __('Two Columns','weaver-xtreme' /*adm*/) ),
-			array('val' => '3', 'desc' => __('Three Columns','weaver-xtreme' /*adm*/) ) )
+			array('val' => '1', 'desc' => __('1 Column','weaver-xtreme' /*adm*/) ),
+			array('val' => '2', 'desc' => __('2 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '3', 'desc' => __('3 Columns','weaver-xtreme' /*adm*/) ) )
 		);
 	wvrx_ts_pp_select_id($opts);
 
@@ -162,11 +180,11 @@ function wvrx_ts_pwp_cols() {
 		'info' => __('Use <em>Masonry</em> for multi-column display','weaver-xtreme' /*adm*/),
 		'value' => array(
 			array('val' => '', 'desc' => '&nbsp;' ),
-			array('val' => '1', 'desc' => __('One Column','weaver-xtreme' /*adm*/) ),
-			array('val' => '2', 'desc' => __('Two Columns','weaver-xtreme' /*adm*/) ),
-			array('val' => '3', 'desc' => __('Three Columns','weaver-xtreme' /*adm*/) ),
-			array('val' => '4', 'desc' => __('Four Columns','weaver-xtreme' /*adm*/) ),
-			array('val' => '5', 'desc' => __('Five Columns','weaver-xtreme' /*adm*/) ) )
+			array('val' => '1', 'desc' => __('1 Column','weaver-xtreme' /*adm*/) ),
+			array('val' => '2', 'desc' => __('2 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '3', 'desc' => __('3 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '4', 'desc' => __('4 Columns','weaver-xtreme' /*adm*/) ),
+			array('val' => '5', 'desc' => __('5 Columns','weaver-xtreme' /*adm*/) ) )
 		);
 	wvrx_ts_pp_select_id($opts2);
 
@@ -241,9 +259,12 @@ the <em></em>&mdash; Select &mdash;</em> default value.','weaver-xtreme' /*adm*/
 	wvrx_ts_page_checkbox('_pp_hide_page_title',__('Hide Page Title','weaver-xtreme' /*adm*/));
 	wvrx_ts_page_checkbox('_pp_full_browser_height',__('Force full browser height','weaver-xtreme' /*adm*/),33,2);
 
+	wvrx_ts_page_cols();
+
 	_e('<em>Note:</em> the following options work with the default menu - not custom menus.','weaver-xtreme' /*adm*/);
 	weaverx_html_br();
 	wvrx_ts_page_checkbox('_pp_hide_on_menu',__('Hide Page on the default Primary Menu','weaver-xtreme' /*adm*/),90,1);
+
 
 
 	wvrx_ts_page_checkbox('_pp_stay_on_page',__('Menu "Placeholder" page. Useful for top-level menu item - don\'t go anywhere when menu item is clicked.','weaver-xtreme' /*adm*/),90,2);
@@ -557,7 +578,8 @@ function wvrx_ts_save_post_fields($post_id) {
 	'_pp_wvrx_pwp_cols', '_pp_post_filter', '_pp_header-widget-area' ,'_pp_footer-widget-area',
 	'_pp_hide_page_infobar', '_pp_hide_n_posts','_pp_fullposts', '_pp_pwp_masonry','_pp_pwp_compact','_pp_pwp_compact_posts',
 	'_primary-widget-area', '_secondary-widget-area', '_header-widget-area', '_footer-widget-area', '_sitewide-top-widget-area',
-	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area', '_pp_full_browser_height'
+	'_sitewide-bottom-widget-area', '_page-top-widget-area', '_page-bottom-widget-area', '_pp_full_browser_height',
+	'_pp_page_cols'
 	);
 
 if (weaverx_allow_multisite()) {
