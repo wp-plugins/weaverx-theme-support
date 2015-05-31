@@ -106,3 +106,5 @@ without modifying theme or plugin .css files.
 }
 
 .wvr-tabs-panes {position:relative;z-index:2;}		/* add line to tab */
+
+.wvr-tabs-nav {position:relative;z-index:3;}

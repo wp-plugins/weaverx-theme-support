@@ -354,6 +354,7 @@ You can define extra widget areas on the bottom of the <em>Main Options &rarr; S
 	?>
 	<br />
 <?php _e('These settings are optional, and can filter which posts are displayed when you use the "Page with Posts" template.
+Use commas to separate items in lists.
 The settings will be combined for the final filtered list of posts displayed.
 (If you make mistakes in your settings, it won\'t be apparent until you display the page.)','weaver-xtreme' /*adm*/); ?>
 <br />
