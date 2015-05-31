@@ -284,7 +284,7 @@ function wvrx_ts_sc_login($args = '') {
     extract(shortcode_atts(array(
     ), $args));
 
-    return wp_loginout( '', false );
+    return '<span class="wvrx-loginout">' . wp_loginout( '', false ) . '</span>';
 }
 
 // ===============  [tab_group ] ======================

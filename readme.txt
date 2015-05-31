@@ -7,9 +7,9 @@ Contributors: wpweaver
 Author: wpweaver
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Requires at least: 3.9
+Requires at least: 4.0
 Tested up to: 4.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 A useful shortcode and widget collection for Weaver Xtreme
 
@@ -74,6 +74,11 @@ Support for this plugin can best be found at our forum - http://forum.weaverthem
 This is the initial release of this plugin.
 
 == ChangeLog ==
+== 1.2 =
+* New: Improved automatic version update for Weaver Xtreme -
+  avoids critical update delays due to WordPress theme review process time lag
+* Fixed issue with tabs shortcode
+
 = 1.1 =
 * Fixed some wording (ATW Show Posts -> Weaver Show Posts)
 * Updated WP compatibility level
