@@ -469,14 +469,10 @@ function wvrx_ts_post_extras() {
 	wvrx_ts_page_checkbox('_pp_post_add_link',__('Show a "link to single page" icon at bottom of post - useful with compact posts','weaver-xtreme' /*adm*/),90);
 
 
-	echo('<br style="clear:both;"/><br /><strong>Per Post Style</strong>' /*a*/ );
+	echo('<br style="clear:both;"/><br /><strong>Per Post Style</strong> (&starf;Plus)' /*a*/ );
 	weaverx_help_link('help.html#perpoststyle', __('Help for Per Post Style','weaver-xtreme' /*adm*/ ));
 	echo '<br />' .
-__('Enter optional per post CSS style rules. <strong>Do not</strong> include the &lt;style> and &lt;/style> tags.
-Include the {}\'s. Don\'t use class names if rules apply to whole post, but do include class names
-(e.g., <em>.entry-title a</em>) for specific elements. Custom styles will not be displayed by the Post Editor.','weaver-xtreme' /*adm*/); ?>
-<br />
-	<textarea name="_pp_post_styles" rows=2 style="width: 95%"><?php echo(get_post_meta($post->ID, "_pp_post_styles", true)); ?></textarea>
+__('Weaver Xtreme Plus supports optional per post CSS style rules.','weaver-xtreme' /*adm*/); ?>
 <br />
 <br />
 <p><strong><?php _e('<em>Single Page View:</em> Sidebars','weaver-xtreme' /*adm*/); ?></strong></p>
