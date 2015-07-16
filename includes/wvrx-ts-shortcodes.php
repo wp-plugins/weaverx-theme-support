@@ -388,14 +388,14 @@ function wvrx_ts_sc_youtube($args = '') {
     // not including: enablejsapi, fs,playerapiid,
 
     extract(shortcode_atts(array(
-        'id' => '',
+        'autohide' => '~!',
+		'autoplay' => '0',
+		'id' => '',
         'sd' => false,
         'related' => '0',
         'privacy' => false,
         'ratio' => false,
         'center' => '1',
-        'autohide' => '~!',
-        'autoplay' => '0',
         'border' => '0',
         'color' => false,
         'color1' => false,
